@@ -2,8 +2,7 @@ package AcmeFun;
 
 import AcmeFun.acesso.ListaAcessos;
 import AcmeFun.cliente.*;
-import AcmeFun.entretenimento.ListaEntretenimentos;
-import AcmeFun.forms.SceneControler;
+import AcmeFun.entretenimento.*;
 
 public class Gerenciador {
     private ListaAcessos lAcessos = new ListaAcessos();
@@ -14,14 +13,12 @@ public class Gerenciador {
 
     public void logIn(String email, String pass){
         if (email.equals("administracao@mail.com") && pass.equals("admin123")){
-            SceneControler.switchScene("admin");
-            usuarioAtivo = null;
+
         }
         else{
             Cliente c = lClientes.pesquisaClientesEmail(email);
             if(c.getSenha() == pass){
-                setUsuarioAtivo(c);
-                SceneControler.switchScene("user");
+
             }
             else{
                 System.out.println("Credenciais incorretas, tente novamente.");
@@ -33,7 +30,28 @@ public class Gerenciador {
         usuarioAtivo = cliente;
     }
 
-    public void cadastraCliente(int tipo, String nome, String email, String senha, int id, String extra){
+    public void cadastraEntretenimento(int tipo, int codigo, String titulo, String ano, String extra1, String extra2, String extra3){
+        Entretenimento e = null;
+
+        switch (tipo){
+            case 1 -> {
+                e = new Filme(codigo,titulo,ano,Integer.parseInt(extra1));
+            }
+            case 2 -> {
+                e = new Jogo(codigo,titulo,ano,extra1,extra2);
+            }
+            case 3 -> {
+                e = new Serie(codigo,titulo,ano,extra1);
+            }
+            case 4 -> {
+                Serie serie = (Serie) lEntretenimentos.pesquisaEntretenimentoID(Integer.parseInt(extra3));
+                e = new Episodio(codigo,titulo,ano,Integer.parseInt(extra1),Integer.parseInt(extra2), serie);
+            }
+        }
+        lEntretenimentos.cadastra(e);
+    }
+
+    public void cadastraCliente(int tipo, String nome, String email, String senha, String id, String extra){
         Cliente c = null;
 
         switch (tipo){
