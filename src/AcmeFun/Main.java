@@ -84,10 +84,115 @@ public class Main {
 
             switch (in.nextLine()) {
                 case "1" -> {
+                    System.out.println("Informe o nome do usuário que deseja registrar: ");
+                    String nome = in.nextLine();
+                    System.out.println("Informe o e-mail do usuário que deseja registrar: ");
+                    String email = in.nextLine();
+                    System.out.println("Informe o senha que deseja registrar para este usuário: ");
+                    String senha = in.nextLine();
+                    System.out.println("Que tipo de usuário deseja cadastrar?");
+                    System.out.println("(1) Cliente não vinculado /n (2) Cliente vinculado /n " +
+                            "(3) Conta empresarial");
+                    String tipo = in.nextLine();
 
+                    Cliente cli = null;
+
+                    while (true) {
+                        switch (tipo){
+                            case "1" ->{
+                                System.out.println("Informe o CPF do usuário que deseja registrar: ");
+                                String cpf = in.nextLine();
+
+                                cli = new ClienteIndividual(nome, email, senha, cpf, null);
+                                catalogoUsuarios.cadastraCliente(cli, false);
+                                break;
+                            }
+                            case "2" ->{
+                                System.out.println("Informe o CPF do usuário que deseja registrar: ");
+                                String cpf = in.nextLine();
+                                System.out.println("Informe o e-mail da empresa em que o usuário está vinculado: ");
+                                String empresa = in.nextLine();
+
+                                ClienteEmpresarial cliEmp = (ClienteEmpresarial) catalogoUsuarios.procuraUsuario(empresa);
+                                cli = new ClienteIndividual(nome, email, senha, cpf, cliEmp);
+                                catalogoUsuarios.cadastraCliente(cli, false);
+                                break;
+                            }
+                            case "3" -> {
+                                System.out.println("Informe o CNPJ da empresa que deseja registrar: ");
+                                String cnpj = in.nextLine();
+                                System.out.println("Informe nome fantasia da empresa que deseja registrar: ");
+                                String nomeFantasia = in.nextLine();
+
+                                cli = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
+                                catalogoUsuarios.cadastraCliente(cli, false);
+                                break;
+                            }
+                            default ->
+                                    System.out.println("Opção invalida!");
+                        }
+                    }
                 }
                 case "2" -> {
+                    System.out.println("Informe o código do entretenimento que deseja registrar: ");
+                    String codigo = in.nextLine();
+                    System.out.println("Informe o título do entretenimento que deseja registrar: ");
+                    String titulo = in.nextLine();
+                    System.out.println("Informe o ano de lançamento do entretenimento que deseja registrar: ");
+                    int anoLanc = Integer.parseInt(in.nextLine());
+                    System.out.println("Que tipo de entretenimento deseja cadastrar?");
+                    System.out.println("(1) Filme /n (2) Jogo /n " +
+                            "(3) Serie /n (4) Episódio de série");
+                    String tipo = in.nextLine();
 
+                    Entretenimento ent = null;
+
+                    while (true) {
+                        switch (tipo){
+                            case "1" ->{
+                                System.out.println("Informe a duração do filme que deseja registrar: ");
+                                int duracao = Integer.parseInt(in.nextLine());
+
+                                ent = new Filme(codigo, titulo, anoLanc, duracao);
+                                catalogoEntretenimento.addEntretenimento(ent, false);
+                                break;
+                            }
+                            case "2" ->{
+                                System.out.println("Informe o título original do jogo que deseja registrar: ");
+                                String tituloOriginal = in.nextLine();
+                                System.out.println("Informe o gênero que o jogo melhor se enquadra: ");
+                                String genero = in.nextLine();
+
+                                ent = new Jogo(codigo, titulo, anoLanc, tituloOriginal, genero);
+                                catalogoEntretenimento.addEntretenimento(ent, false);
+                                break;
+                            }
+                            case "3" -> {
+                                System.out.println("Informe o ano de conclusão que deseja registrar: ");
+                                int anoConc = Integer.parseInt(in.nextLine());
+
+                                ent = new Serie(codigo,titulo,anoLanc,anoConc);
+                                catalogoEntretenimento.addEntretenimento(ent, false);
+                                break;
+                            }
+                            case "4" -> {
+                                System.out.println("Informe de que temporada é o episódio que deseja registrar: ");
+                                int numTemporada = Integer.parseInt(in.nextLine());
+                                System.out.println("Informe o número do episódio que deseja registrar: ");
+                                int numEpisodio = Integer.parseInt(in.nextLine());
+                                System.out.println("Informe o código da série em que este episódio pertence: ");
+                                String codSerie = in.nextLine();
+
+                                Serie serie = (Serie) catalogoEntretenimento.pesquisaCodigo(codSerie);
+                                EpisodioSerie episodio = new EpisodioSerie(codigo, titulo, anoLanc, numTemporada, numEpisodio, serie);
+                                catalogoEntretenimento.addEntretenimento(episodio, false);
+                                serie.linkaEp(episodio);
+                                break;
+                            }
+                            default ->
+                                    System.out.println("Opção invalida!");
+                        }
+                    }
                 }
                 case "3" -> {
 

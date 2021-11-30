@@ -21,6 +21,10 @@ public class Serie extends Entretenimento{
         return episodios;
     }
 
+    public void linkaEp(EpisodioSerie ep){
+        episodios.add(ep);
+    }
+
     @Override
     public String toString() {
         return getTipo() +

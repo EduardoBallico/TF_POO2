@@ -115,15 +115,16 @@ public class Arquivo {
                         e.addEntretenimento(serie, true);
                     }
                     case "4" -> {
-                        System.out.println("Episodio");
+                        System.out.println("Episódio");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
                         int numTemporada = Integer.parseInt(valores.get(4));
                         int numEpisodio = Integer.parseInt(valores.get(5));
                         Serie serie = (Serie) e.pesquisaCodigo(valores.get(6));
-                        Entretenimento episodio = new EpisodioSerie(codigo, titulo, anoLancamento, numTemporada, numEpisodio, serie);
+                        EpisodioSerie episodio = new EpisodioSerie(codigo, titulo, anoLancamento, numTemporada, numEpisodio, serie);
                         e.addEntretenimento(episodio, true);
+                        serie.linkaEp(episodio);
                     }
                 }
             }
