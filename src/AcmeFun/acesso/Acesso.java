@@ -7,13 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Acesso {
-
     private Cliente cliente;
-
     private Entretenimento entretenimento;
-
     private LocalDateTime dataHora;
-
     private int cobranca;
 
     public Acesso(Cliente cliente, Entretenimento entretenimento) {

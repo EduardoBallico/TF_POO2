@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class CatalogoAcesso {
 
     private final static ArrayList<Acesso> acessos = new ArrayList<>();
-    private final static Arquivo arquivo = new Arquivo();
-    private static File persistenciaAcessos= new File(
+    private final static Arquivo arqv = new Arquivo();
+    private static File fileAcessos = new File(
             "src/main/resources/com/example/trabalhofinal2/arquivos/persistencia-acessos.dat");
 
     public ArrayList<Acesso> getCatalogo() { return acessos; }
 
-    public boolean addAcesso(Acesso acesso){
+    public boolean adicionaAcesso(Acesso acesso){
         if(acesso.getCliente().defineTipo() == 3){
             acesso.setCobranca(acesso.getCobranca() / 2);
 
@@ -35,15 +35,14 @@ public class CatalogoAcesso {
 
             Acesso acessoEmpresa = new Acesso(empresanova,acesso.getEntretenimento());
             acessoEmpresa.setCobranca(acessoEmpresa.getCobranca() / 2);
-
             acessos.add(acesso);
             acessos.add(acessoEmpresa);
-            arquivo.writeFile(persistenciaAcessos,acesso.toString()+ "\n");
-            arquivo.writeFile(persistenciaAcessos,acessoEmpresa.toString()+ "\n");
+            arqv.writeFile(fileAcessos,acesso.toString()+ "\n");
+            arqv.writeFile(fileAcessos,acessoEmpresa.toString()+ "\n");
             return true;
         } else if (acesso.getCliente().defineTipo() == 2 || acesso.getCliente().defineTipo() == 1){
             acessos.add(acesso);
-            arquivo.writeFile(persistenciaAcessos,acesso.toString()+ "\n");
+            arqv.writeFile(fileAcessos,acesso.toString()+ "\n");
             return true;
         }
         return false;
@@ -118,8 +117,8 @@ public class CatalogoAcesso {
         }
     }
 
-    public  File getPersistenciaAcessos() {
-        return persistenciaAcessos;
+    public  File getFileAcessos() {
+        return fileAcessos;
     }
 }
 

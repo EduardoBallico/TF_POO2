@@ -141,7 +141,7 @@ public class Arquivo {
                 Entretenimento entretenimento = entretenimentos.buscaPorCodigo(codigoEntretenimento);
 
                 Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);
-                acessos.addAcesso(acesso);
+                acessos.adicionaAcesso(acesso);
                 System.out.println("Acesso Cadastrado");
             }
 
