@@ -1,12 +1,13 @@
 package AcmeFun.cliente;
 
+import AcmeFun.Arquivo;
+
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CatalogoUsuarios {
 
-    private final static ArrayList<Usuario> usuarios = new ArrayList<>();
+    private static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static Arquivo arquivo = new Arquivo();
     private static File persistenciaClientes = new File(
             "src/main/resources/com/example/trabalhofinal2/arquivos/persistencia-clientes.dat");
