@@ -1,17 +1,38 @@
 package AcmeFun.entretenimento;
 
-import java.util.*;
+import java.util.ArrayList;
 
-public class Serie extends Entretenimento {
+public class Serie extends Entretenimento{
 
-	private String anoConclusao;
-	private LinkedList<Episodio> episodios;
+    private int anoConclusao;
 
-	public Serie(int id, String titulo, String anoLancamento, String anoConclusao) {
-		super(id, titulo, anoLancamento);
-		this.anoConclusao = anoConclusao;
-	}
+    private ArrayList<EpisodioSerie> episodios;
 
-	public String getAnoConclusao() { return anoConclusao; }
-	public LinkedList<Episodio> getEpisodios() { return episodios; }
+    public Serie(String codigo, String titulo, int anoLancamento, int anoConclusao) {
+        super(codigo, titulo, anoLancamento);
+        this.anoConclusao = anoConclusao;
+    }
+
+    public int getAnoConclusao() {
+        return anoConclusao;
+    }
+
+    public ArrayList<EpisodioSerie> getEpisodios() {
+        return episodios;
+    }
+
+    @Override
+    public String toString() {
+        return getTipo() +
+                ";" + getCodigo() + ";" +
+                getTitulo() + ";" +
+                getAnoLancamento() + ";" +
+                getAnoConclusao();
+    }
+
+    @Override
+    public int defineTipo(){
+        return 3;
+    }
 }
+

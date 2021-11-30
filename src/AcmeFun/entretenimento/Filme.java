@@ -1,20 +1,30 @@
 package AcmeFun.entretenimento;
 
-import java.util.Calendar;
+public class Filme extends Entretenimento{
 
-public class Filme extends Entretenimento {
+    private int tempoDurcao;
 
-	private int duracao;
+    public Filme(String codigo, String titulo, int anoLancamento, int tempoDurcao) {
+        super(codigo, titulo, anoLancamento);
+        this.tempoDurcao = tempoDurcao;
+    }
 
-	public Filme (int id, String titulo, String anoLancamento, int duracao){
-		super(id,titulo, anoLancamento);
-		this.duracao = duracao;
-	}
+    public int getTempoDurcao() {
+        return tempoDurcao;
+    }
 
-	@Override
-	public int getPreco() {
-		return 6;
-	}
+    @Override
+    public String toString() {
+        return getTipo() +
+                ";" + getCodigo() + ";" +
+                getTitulo() + ";" +
+                getAnoLancamento() + ";" +
+                getTempoDurcao();
+    }
 
-	public int getDuracao() { return duracao; }
+    @Override
+    public int defineTipo(){
+        return 1;
+    }
 }
+

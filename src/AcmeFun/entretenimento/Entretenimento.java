@@ -1,22 +1,49 @@
 package AcmeFun.entretenimento;
 
-import java.util.Calendar;
+public class Entretenimento {
 
-public abstract class Entretenimento {
+    private String codigo;
 
-	private int id;
-	private String titulo;
-	private String anoLancamento;
-	private int preco;
+    private String titulo;
 
-	public Entretenimento(int id, String titulo, String anoLancamento){
-		this.id = id;
-		this.titulo = titulo;
-		this.anoLancamento = anoLancamento;
-	}
+    private int tipo;
 
-	public abstract int getPreco();
-	public String getAnoLancamento() { return anoLancamento; }
-	public int getId() { return id; }
-	public String getTitulo() { return titulo; }
+    private int anoLancamento;
+
+    public Entretenimento(String id, String titulo, int anoLancamento) {
+        this.codigo = id;
+        this.titulo = titulo;
+        this.anoLancamento = anoLancamento;
+        this.tipo = defineTipo();
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int getTipo() { return tipo;}
+
+    public int getAnoLancamento() {
+        return anoLancamento;
+    }
+
+    // dei override nesse metodo em cada uma das subclasses, acredito que assim ele funcione
+
+    public int defineTipo(){
+        // if(this.getClass().getSimpleName().equals("Filme")){
+        //     return 1;
+        // }else if(this.getClass().getSimpleName().equals("Jogo")){
+        //     return 2;
+        // }else if(this.getClass().getSimpleName().equals("Serie")){
+        //     return 3;
+        // }else{
+        //     return 4;
+        // }
+        return 0;
+    }
+    
 }
