@@ -48,6 +48,7 @@ public class CatalogoAcesso {
         return false;
     }
 
+    //todo
     public ArrayList<Acesso> getAcessosDaqueleMesGeral(int ano, int mes){
         ArrayList<Acesso> resultadoGeral = new ArrayList<>();
         for (Acesso acesso : acessos) {
@@ -63,6 +64,7 @@ public class CatalogoAcesso {
         }
     }
 
+    //todo
     public ArrayList<Acesso> getAcessosDaqueleMesCliente(ArrayList<Acesso> resultadoGeral, Cliente cliente){
         ArrayList<Acesso> resultadoCliente = new ArrayList<>();
         if(resultadoGeral!=null && cliente!=null){
@@ -88,6 +90,8 @@ public class CatalogoAcesso {
         return relatorio;
 
     }
+
+    //todo
     public double cobrancaMensalGeral(int ano, int mes){
         double valorFinal = 0;
         for (Acesso acesso : getAcessosDaqueleMesGeral(ano, mes)) {
@@ -96,6 +100,7 @@ public class CatalogoAcesso {
         return valorFinal;
     }
 
+    //todo
     public double cobrancaMensalCliente(int ano, int mes, ArrayList<Acesso> acessosCliente, Cliente cliente){
         double valorFinal = 0;
         for (Acesso acesso : getAcessosDaqueleMesCliente(acessosCliente,cliente)) {
@@ -104,8 +109,8 @@ public class CatalogoAcesso {
         return valorFinal;
     }
 
+    //todo
     public String relatorioFinalAcessos(File file){
-
         String aux = "";
         for (Acesso value : acessos) {
             aux+= "Cadastrado Acesso: " + value.toString() + "\n";
