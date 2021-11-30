@@ -13,10 +13,14 @@ public class Main {
 	}
 
 	public void iniciar(){
-
+		// carregar os dados]
+		// login
 	}
 
-	public void executar(){
+	public void executarAdmin(){
+
+	}
+	public void executarCliente(){
 
 	}
 

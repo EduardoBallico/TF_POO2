@@ -16,19 +16,16 @@ public class ListaEntretenimentos {
         entretenimentos.add(e);
     }
 
-    public ArrayList<Entretenimento> pesquisaEntretenimentoID(int ID) { //throws exception
+    public Entretenimento pesquisaEntretenimentoID(int ID) { //throws exception
 
         if (this.entretenimentos.isEmpty()) { return null; }//throw new exception(); }
 
-        this.consAtual = new ArrayList<>();
-
         for (Entretenimento ent : this.entretenimentos) {
             if (ID == ent.getId()) {
-                consAtual.add(ent);
+                return ent;
             }
         }
-        if (consAtual.isEmpty()) { return null; } //throw new exception(); }
-        return consAtual;
+        return null;
     }
 
     public ArrayList<Entretenimento> pesquisaEntretenimentoTitComp(String titulo) { //throws exception
