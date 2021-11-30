@@ -9,7 +9,8 @@ public class CatalogoEntretenimento {
 
     private final static ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
 
-    public ArrayList<Entretenimento> getCatalogo() { return entretenimentos; }
+    private ArrayList<Entretenimento> ultimaConsulta;
+    public ArrayList<Entretenimento> getEntretenimentos() { return entretenimentos; }
 
     public boolean verificaCodigo(Entretenimento entretenimento){
         for (Entretenimento ent : entretenimentos) {
@@ -55,32 +56,23 @@ public class CatalogoEntretenimento {
         return list;
     }
 
-    public ArrayList<Entretenimento> pesquisaTitCompleto(String titulo){
-        ArrayList<Entretenimento> list = new ArrayList<>();
+    public ArrayList<Entretenimento> pesquisaTitulo(String titulo){
+
+        ultimaConsulta = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
-            if(value.getTitulo().equals(titulo)){
-                list.add(value);
+            if(value.getTitulo().equals(titulo)
+                    || value.getTitulo().contains(titulo)){
+                ultimaConsulta.add(value);
             }
         }
-        if(list.size()==0){ return null; }
-        return list;
+        if(ultimaConsulta.isEmpty()){ return null; }
+        return ultimaConsulta;
     }
 
-    public ArrayList<Entretenimento> pesquisaTitIncompleto(String tituloIncompleto){
+    public ArrayList<Entretenimento> pesquisaAnoLanc(int anoLancamento){
         ArrayList<Entretenimento> list = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
-            if(value.getTitulo().contains(tituloIncompleto)){
-                list.add(value);
-            }
-        }
-        if(list.size()==0){ return null; }
-        return list;
-    }
-
-    public ArrayList<Entretenimento> pesquisaAnoLanc(int anoLancamentoInicio, int anoLancamentoFinal){
-        ArrayList<Entretenimento> list = new ArrayList<>();
-        for (Entretenimento value : entretenimentos) {
-            if(value.getAnoLancamento() > anoLancamentoInicio && value.getAnoLancamento() < anoLancamentoFinal){
+            if(value.getAnoLancamento() > anoLancamento && value.getAnoLancamento() < anoLancamento){
                 list.add(value);
             }
         }

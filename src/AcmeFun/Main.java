@@ -112,8 +112,31 @@ public class Main {
 
             switch (in.nextLine()) {
                 case "1" -> {
-                    //Consultar catálogo de entretenimento
+                    // tipo de consulta
+                    String tipo;
+                    // ordem
+                    String ordenacao;
+                    // dado pra consulta
+                    String consulta;
 
+                    switch(tipo){
+                        case "1" -> {
+                            catalogoEntretenimento.pesquisaTitulo()
+                        }
+                        case "2" -> {
+                            catalogoEntretenimento.pesquisaTitulo()
+                        }
+                        case "3" -> {
+                            catalogoEntretenimento.pesquisaTitulo()
+                        }
+                        case "4" -> {
+                            catalogoEntretenimento.pesquisaTitulo()
+                        }
+                    }
+
+                    if(){
+
+                    }
                 }
                 case "2" -> {
 
