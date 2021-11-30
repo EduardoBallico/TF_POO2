@@ -8,9 +8,6 @@ import java.util.ArrayList;
 public class CatalogoUsuarios {
 
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
-    private static Arquivo arqv = new Arquivo();
-    private static File fileCliente = new File(
-            "src/main/resources/com/example/trabalhofinal2/arquivos/persistencia-clientes.dat");
 
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
@@ -44,11 +41,14 @@ public class CatalogoUsuarios {
         }
     }
 
-
-    public boolean cadastraCliente(Usuario usuario){
+    public boolean cadastraCliente(Usuario usuario, boolean isLoadingFromFile){
         if(!verificaUsuario(usuario)){
             usuarios.add(usuario);
-            arqv.writeFile(fileCliente,usuario.toString() + "\n");
+
+            if(!isLoadingFromFile){
+                Arquivo.writeFile(Arquivo.getArquivoClientes(),usuario.toString() + "\n");
+            }
+
             return true;
         }
             return false;
@@ -102,11 +102,6 @@ public class CatalogoUsuarios {
          }
          return true;
      }
-
-    //todo
-    public File getPersistenciaClientes() {
-        return fileCliente;
-    }
 
     public String toString() {
         String aux = "";

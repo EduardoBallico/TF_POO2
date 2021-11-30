@@ -33,18 +33,18 @@ public class Main {
 
         Administrador adm = new Administrador("administracao@mail.com","admin123");
 
-        catalogoUsuarios.cadastraCliente(adm);
+        catalogoUsuarios.cadastraCliente(adm, false);
 
-        Arquivo arquivo = new Arquivo();
-        arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());
-        arquivo.readFileCliente(Arquivo.getArquivoClientes());
-        arquivo.readFileAcessos(Arquivo.getArquivoAcessos());
+        Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());
+        Arquivo.readFileCliente(Arquivo.getArquivoClientes());
+        Arquivo.readFileAcessos(Arquivo.getArquivoAcessos());
     }
 
     public Usuario fazLogin(String email, String senha){
-        //Verifica se existe
-        //Verifica se senha bate
-        //Coloca o usuario no usuario ativo;
+        Usuario u = catalogoUsuarios.procuraUsuario(email);
+        if(u.getSenha().equals(senha)){
+            return u;
+        }
         return null;
     }
 
@@ -112,6 +112,7 @@ public class Main {
 
             switch (in.nextLine()) {
                 case "1" -> {
+                    //Consultar catálogo de entretenimento
 
                 }
                 case "2" -> {

@@ -8,10 +8,6 @@ import java.util.ArrayList;
 public class CatalogoEntretenimento {
 
     private final static ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
-    private static Arquivo arquivo = new Arquivo();
-    private static File persistenciaEntretenimento= new File(
-            "src/main/resources/com/example/trabalhofinal2/arquivos/persistencia-entretenimento.dat");
-
 
     public ArrayList<Entretenimento> getCatalogo() { return entretenimentos; }
 
@@ -24,11 +20,15 @@ public class CatalogoEntretenimento {
         return true;
     }
 
-    public boolean addEntretenimentoValido(Entretenimento entretenimento){
+    // Feshow
+    public boolean addEntretenimento(Entretenimento entretenimento, boolean isLoadingFromFile){
         if(verificaCodigo(entretenimento)){
             entretenimentos.add(entretenimento);
-            arquivo.writeFile(persistenciaEntretenimento,entretenimento.toString() + "\n");
-            System.out.println("Adicionou e escreveu");
+
+            if(!isLoadingFromFile){
+                Arquivo.writeFile(Arquivo.getArquivoEntretenimentos(),entretenimento.toString() + "\n");
+            }
+
             return true;
         }
         return false;

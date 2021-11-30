@@ -12,150 +12,163 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public class Arquivo {
 
-    private static CatalogoUsuarios clientes = new CatalogoUsuarios();
-    private static CatalogoAcesso acessos = new CatalogoAcesso();
-    private static CatalogoEntretenimento entretenimentos = new CatalogoEntretenimento();
-
     private static File arquivoClientes = new File(
-            "src/main/resources/com/example/trabalhofinal2/arquivos/TESTE-clientes.dat");
+            "src/data/TESTE-cliente.dat");
     private static File arquivoEntretenimentos = new File(
-            "src/main/resources/com/example/trabalhofinal2/arquivos/TESTE-entretenimento.dat");
+            "src/data/TESTE-entretenimento.dat");
     private static File arquivoAcessos = new File(
-            "src/main/resources/com/example/trabalhofinal2/arquivos/TESTE-acessos.dat");
+            "src/data/TESTE-acessos.dat");
 
+    // Fechou
+    public static void readFileCliente(File strFile){
 
-    public void readFileCliente(File strFile){
+        CatalogoUsuarios u = new CatalogoUsuarios();
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
-            System.out.println("Chegou aqui em cima");
             while(buffRead.ready()) {
                 String line = buffRead.readLine();
-                List<String> valores = new ArrayList<>(List.of(line.split(";", -1)));
-                if(valores.get(0).equals("1")){
-                    System.out.println("Cliente 1");
-                    String nome = valores.get(1);
-                    String email = valores.get(2);
-                    String senha = valores.get(3);
-                    String cpf = valores.get(4);
-                    ClienteIndividual clienteIndividualSemEmpresa = new ClienteIndividual(nome,email,senha,cpf,null);
-                    clientes.cadastraCliente(clienteIndividualSemEmpresa);
 
-                }else if(valores.get(0).equals("2")){
-                    System.out.println("Cliente 2");
-                    String nome = valores.get(1);
-                    String email = valores.get(2);
-                    String senha = valores.get(3);
-                    String cnpj = valores.get(4);
-                    String nomeFantasia = valores.get(5);
-                    ClienteEmpresarial clienteEmpresarial = new ClienteEmpresarial(nome,email,senha,cnpj,nomeFantasia);
-                    clientes.cadastraCliente(clienteEmpresarial);
+                ArrayList<String> valores = new ArrayList<>();
+                Collections.addAll(valores, line.split(";"));
 
-                }else if(valores.get(0).equals("3")){
-                    System.out.println("Cliente 3");
-                    String nome = valores.get(1);
-                    String email = valores.get(2);
-                    String senha = valores.get(3);
-                    String cpf = valores.get(4);
-                    String emailEmpresa = valores.get(5);
-                    ClienteEmpresarial empresa = (ClienteEmpresarial) clientes.procuraUsuario(emailEmpresa);
-                    ClienteIndividual clienteIndividualComEmpresa = new ClienteIndividual(nome,email,senha,cpf,empresa);
-                    clientes.cadastraCliente(clienteIndividualComEmpresa);
+                switch (valores.get(0)) {
+                    case "1" -> {
+                        System.out.println("Cliente 1");
+                        String nome = valores.get(1);
+                        String email = valores.get(2);
+                        String senha = valores.get(3);
+                        String cpf = valores.get(4);
+                        ClienteIndividual individualSemEmpresa = new ClienteIndividual(nome, email, senha, cpf, null);
+                        u.cadastraCliente(individualSemEmpresa, true);
+                    }
+                    case "2" -> {
+                        System.out.println("Cliente 2");
+                        String nome = valores.get(1);
+                        String email = valores.get(2);
+                        String senha = valores.get(3);
+                        String cnpj = valores.get(4);
+                        String nomeFantasia = valores.get(5);
+                        ClienteEmpresarial empresarial = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
+                        u.cadastraCliente(empresarial, true);
+                    }
+                    case "3" -> {
+                        System.out.println("Cliente 3");
+                        String nome = valores.get(1);
+                        String email = valores.get(2);
+                        String senha = valores.get(3);
+                        String cpf = valores.get(4);
+                        String emailEmpresa = valores.get(5);
+                        ClienteEmpresarial empresa = (ClienteEmpresarial) u.procuraUsuario(emailEmpresa);
+                        ClienteIndividual individualComEmpresa = new ClienteIndividual(nome, email, senha, cpf, empresa);
+                        u.cadastraCliente(individualComEmpresa, true);
+                    }
                 }
             }
-        } catch (IOException e){
+        } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
         }
     }
 
-    public void readFileEntretenimento(File strFile){
+    // Fechou
+    public static void readFileEntretenimento(File strFile){
+
+        CatalogoEntretenimento e = new CatalogoEntretenimento();
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
-            System.out.println("Chegou aqui em cima");
             while(buffRead.ready()) {
                 String line = buffRead.readLine();
-                List<String> valores = new ArrayList<>(List.of(line.split(";", -1)));
-                if(valores.get(0).equals("1")){
-                    System.out.println("Filme");
-                    String codigo = valores.get(1);
-                    String titulo = valores.get(2);
-                    int anoLancamento = validaInteiro(valores.get(3));
-                    int tempoDuracao = validaInteiro(valores.get(4));
-                    Entretenimento filme = new Filme(codigo,titulo,anoLancamento,tempoDuracao);
-                    entretenimentos.addEntretenimentoValido(filme);
 
-                }else if(valores.get(0).equals("2")){
-                    System.out.println("Jogo");
-                    String codigo = valores.get(1);
-                    String titulo = valores.get(2);
-                    int anoLancamento = validaInteiro(valores.get(3));
-                    String tituloOriginal = valores.get(4);
-                    String genero = valores.get(5);
-                    Entretenimento jogo = new Jogo(codigo,titulo,anoLancamento,tituloOriginal,genero);
-                    entretenimentos.addEntretenimentoValido(jogo);
+                ArrayList<String> valores = new ArrayList<>();
+                Collections.addAll(valores, line.split(";"));
 
-                }else if(valores.get(0).equals("3")){
-                    System.out.println("Serie");
-                    String codigo = valores.get(1);
-                    String titulo = valores.get(2);
-                    int anoLancamento = validaInteiro(valores.get(3));
-                    int anoConclusao = validaInteiro(valores.get(4));
-                    Entretenimento serie = new Serie(codigo,titulo,anoLancamento,anoConclusao);
-                    entretenimentos.addEntretenimentoValido(serie);
-
-                }else if(valores.get(0).equals("4")){
-                    System.out.println("Episodio");
-                    String codigo = valores.get(1);
-                    String titulo = valores.get(2);
-                    int anoLancamento = validaInteiro(valores.get(3));
-                    int numTemporada = validaInteiro(valores.get(4));
-                    int numEpisodio= validaInteiro(valores.get(5));
-                    Serie serie = (Serie) entretenimentos.pesquisaCodigo(valores.get(6));
-                    Entretenimento episodio = new EpisodioSerie(codigo,titulo,anoLancamento,numTemporada,numEpisodio,serie);
-                    entretenimentos.addEntretenimentoValido(episodio);
+                switch (valores.get(0)) {
+                    case "1" -> {
+                        System.out.println("Filme");
+                        String codigo = valores.get(1);
+                        String titulo = valores.get(2);
+                        int anoLancamento = Integer.parseInt(valores.get(3));
+                        int tempoDuracao = Integer.parseInt(valores.get(4));
+                        Entretenimento filme = new Filme(codigo, titulo, anoLancamento, tempoDuracao);
+                        e.addEntretenimento(filme, true);
+                    }
+                    case "2" -> {
+                        System.out.println("Jogo");
+                        String codigo = valores.get(1);
+                        String titulo = valores.get(2);
+                        int anoLancamento = Integer.parseInt(valores.get(3));
+                        String tituloOriginal = valores.get(4);
+                        String genero = valores.get(5);
+                        Entretenimento jogo = new Jogo(codigo, titulo, anoLancamento, tituloOriginal, genero);
+                        e.addEntretenimento(jogo, true);
+                    }
+                    case "3" -> {
+                        System.out.println("Serie");
+                        String codigo = valores.get(1);
+                        String titulo = valores.get(2);
+                        int anoLancamento = Integer.parseInt(valores.get(3));
+                        int anoConclusao = Integer.parseInt(valores.get(4));
+                        Entretenimento serie = new Serie(codigo, titulo, anoLancamento, anoConclusao);
+                        e.addEntretenimento(serie, true);
+                    }
+                    case "4" -> {
+                        System.out.println("Episodio");
+                        String codigo = valores.get(1);
+                        String titulo = valores.get(2);
+                        int anoLancamento = Integer.parseInt(valores.get(3));
+                        int numTemporada = Integer.parseInt(valores.get(4));
+                        int numEpisodio = Integer.parseInt(valores.get(5));
+                        Serie serie = (Serie) e.pesquisaCodigo(valores.get(6));
+                        Entretenimento episodio = new EpisodioSerie(codigo, titulo, anoLancamento, numTemporada, numEpisodio, serie);
+                        e.addEntretenimento(episodio, true);
+                    }
                 }
             }
-        } catch (IOException e){
+        } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
         }
     }
 
-    public void readFileAcessos(File strFile){
+    // Feshow
+    public static void readFileAcessos(File strFile){
+
+        CatalogoEntretenimento e = new CatalogoEntretenimento();
+        CatalogoUsuarios u = new CatalogoUsuarios();
+        CatalogoAcesso a = new CatalogoAcesso();
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
-            System.out.println("Chegou aqui em cima");
             while(buffRead.ready()) {
                 String line = buffRead.readLine();
-                List<String> valores = new ArrayList<>(List.of(line.split(";", -1)));
+
+                ArrayList<String> valores = new ArrayList<>();
+                Collections.addAll(valores, line.split(";"));
 
                 String dataHoraMinuto = valores.get(0) +";"+ valores.get(1);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy;HH:mm");
-                LocalDateTime dataConvertida = LocalDateTime.parse(dataHoraMinuto,dtf);
+                LocalDateTime dataConvertida = LocalDateTime.parse(dataHoraMinuto,DateTimeFormatter.ofPattern("dd/MM/yyyy;HH:mm"));
 
                 String email = valores.get(2);
                 String codigoEntretenimento = valores.get(3);
-                Cliente cliente = (Cliente) clientes.procuraUsuario(email);
-                Entretenimento entretenimento = entretenimentos.pesquisaCodigo(codigoEntretenimento);
+                Cliente cliente = (Cliente) u.procuraUsuario(email);
+                Entretenimento entretenimento = e.pesquisaCodigo(codigoEntretenimento);
 
                 Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);
-                acessos.adicionaAcesso(acesso);
+                a.adicionaAcesso(acesso, true);
                 System.out.println("Acesso Cadastrado");
             }
 
-        } catch (IOException e){
+        } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
         }
     }
 
-    public void writeFile(File strFile, String strData){
-
+    public static void writeFile(File strFile, String strData){
         try(BufferedWriter bfwriter = new BufferedWriter(new FileWriter(strFile,true))){
             bfwriter.write(strData);
-
-        }catch(IOException e){
+        }
+        catch(IOException e) {
             e.printStackTrace();
         }
     }
@@ -172,27 +185,7 @@ public class Arquivo {
         return arquivoAcessos;
     }
 
-    public int validaInteiro(String numero){
-        try{
-            int aux = Integer.parseInt(numero);
-            return aux;
-        }
-        catch(NumberFormatException e){
-            System.out.println("Objeto não incluido, número inválido");
-            return -1;
-        }
-    }
-    public long validaLong(String numero){
-        try{
-            long aux = Long.parseLong(numero);
-            return aux;
-        }
-        catch(NumberFormatException e){
-            System.out.println("Objeto não incluido, número inválido");
-            return -1;
-        }
-    }
-
+    /*
     public String readFileRelatorio(File strFile){
 
         String aux = "";
@@ -215,4 +208,5 @@ public class Arquivo {
             return aux;
         }
     }
+    */
 }

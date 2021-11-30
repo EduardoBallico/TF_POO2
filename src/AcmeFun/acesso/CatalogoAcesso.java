@@ -9,43 +9,15 @@ import java.util.ArrayList;
 public class CatalogoAcesso {
 
     private final static ArrayList<Acesso> acessos = new ArrayList<>();
-    private final static Arquivo arqv = new Arquivo();
-    private static File fileAcessos = new File(
-            "src/main/resources/com/example/trabalhofinal2/arquivos/persistencia-acessos.dat");
 
     public ArrayList<Acesso> getCatalogo() { return acessos; }
 
-    public boolean adicionaAcesso(Acesso acesso){
-        if(acesso.getCliente().defineTipo() == 3){
-            acesso.setCobranca(acesso.getCobranca() / 2);
-
-            CatalogoUsuarios listaUsuarios = new CatalogoUsuarios();
-            ArrayList<ClienteIndividual> aux = new ArrayList<>();
-            for (Usuario value : listaUsuarios.getUsuarios()) {
-                if (value.defineTipo()==3) {
-                    aux.add((ClienteIndividual) value);
-                }
-            }
-            ClienteEmpresarial empresanova = null;
-            for(ClienteIndividual clienteEspecifico : aux){
-                if(clienteEspecifico.getEmail().equalsIgnoreCase(acesso.getCliente().getEmail())){
-                    empresanova = clienteEspecifico.getEmpresa();
-                }
-            }
-
-            Acesso acessoEmpresa = new Acesso(empresanova,acesso.getEntretenimento());
-            acessoEmpresa.setCobranca(acessoEmpresa.getCobranca() / 2);
-            acessos.add(acesso);
-            acessos.add(acessoEmpresa);
-            arqv.writeFile(fileAcessos,acesso.toString()+ "\n");
-            arqv.writeFile(fileAcessos,acessoEmpresa.toString()+ "\n");
-            return true;
-        } else if (acesso.getCliente().defineTipo() == 2 || acesso.getCliente().defineTipo() == 1){
-            acessos.add(acesso);
-            arqv.writeFile(fileAcessos,acesso.toString()+ "\n");
-            return true;
+    public boolean adicionaAcesso(Acesso acesso, boolean isLoadingFromFile){
+        acessos.add(acesso);
+        if(!isLoadingFromFile){
+            Arquivo.writeFile(Arquivo.getArquivoAcessos(),acesso.toString()+ "\n");
         }
-        return false;
+        return true;
     }
 
     //todo
@@ -122,8 +94,5 @@ public class CatalogoAcesso {
         }
     }
 
-    public  File getFileAcessos() {
-        return fileAcessos;
-    }
 }
 
