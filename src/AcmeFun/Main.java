@@ -1,5 +1,6 @@
 package AcmeFun;
 
+import AcmeFun.acesso.Acesso;
 import AcmeFun.acesso.CatalogoAcesso;
 import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
@@ -204,8 +205,7 @@ public class Main {
                     System.out.println("Sistema Finalizado");
                     return;
                 }
-                default ->
-                        System.out.println("Opção invalida!");
+                default -> System.out.println("Opção invalida!");
             }
         }
     }
@@ -217,34 +217,68 @@ public class Main {
 
             switch (in.nextLine()) {
                 case "1" -> {
-                    // tipo de consulta
-                    String tipo;
-                    // ordem
-                    String ordenacao;
-                    // dado pra consulta
-                    String consulta;
+                    System.out.println("Informe pelo que deseja pesquisar um entretenimento: ");
+                    System.out.println("1. Codigo");
+                    System.out.println("2. Titulo");
+                    System.out.println("3. Ano de Lançamento");
+                    String tipo = in.nextLine();
 
-                    switch(tipo){
+                    System.out.println("Informe o modo de ordenação desejado: ");
+                    System.out.println("1. Ordem alfabética crescente do título");
+                    System.out.println("2. Ordem decrescente de ano de lançamento");
+                    String ordem = in.nextLine();
+
+                    System.out.println("Informe o que deseja pesquisar: ");
+                    String pesquisa = in.nextLine();
+
+                    switch (tipo){
                         case "1" -> {
-                            catalogoEntretenimento.pesquisaTitulo()
+                            catalogoEntretenimento.pesquisaCodigo(pesquisa);
                         }
                         case "2" -> {
-                            catalogoEntretenimento.pesquisaTitulo()
+                            catalogoEntretenimento.pesquisaTitulo(pesquisa);
                         }
                         case "3" -> {
-                            catalogoEntretenimento.pesquisaTitulo()
-                        }
-                        case "4" -> {
-                            catalogoEntretenimento.pesquisaTitulo()
-                        }
-                    }
 
-                    if(){
-
+                        }
+                        default -> {
+                            System.out.println("Dados informados incorretos!");
+                        }
                     }
                 }
                 case "2" -> {
+                    System.out.println("Selecione o codigo de um dos Entretenimentos da ultima consulta:");
+                    for (Entretenimento e : catalogoEntretenimento.getUltimaConsulta()) {
+                        System.out.println(e);
+                    }
 
+                    Entretenimento e = catalogoEntretenimento.pesquisaCodigo(in.nextLine());
+
+                    if(e == null) {
+                        System.out.println("Entretenimento não encontrado");
+                        continue;
+                    }
+
+                    System.out.println("Deseja acessar esse entretenimento?");
+                    System.out.println("1. Sim");
+                    System.out.println("2. Não");
+
+                    boolean flag = false;
+                    do {
+                        switch(in.nextLine()){
+                            case "1" ->{
+                                Acesso a = new Acesso((Cliente) usuarioAtivo, e);
+                                catalogoAcesso.adicionaAcesso(a, false);
+                                System.out.println("Acesso cadastrado!");
+                                flag = true;
+                            }
+                            case "2" -> {
+                                System.out.println("Acesso a entretenimento não realizado!");
+                                flag = true;
+                            }
+                            default -> System.out.println("Opção invalida");
+                        }
+                    } while(!flag);
                 }
                 case "3" -> {
 

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 public class CatalogoEntretenimento {
 
     private final static ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
+    private ArrayList<Entretenimento> ultimaConsulta = null;
 
-    private ArrayList<Entretenimento> ultimaConsulta;
     public ArrayList<Entretenimento> getEntretenimentos() { return entretenimentos; }
+    public ArrayList<Entretenimento> getUltimaConsulta() { return ultimaConsulta; }
 
     public boolean verificaCodigo(Entretenimento entretenimento){
         for (Entretenimento ent : entretenimentos) {
