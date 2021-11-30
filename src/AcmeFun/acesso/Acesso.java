@@ -31,6 +31,7 @@ public class Acesso {
         else this.cobranca = 8;
     }
 
+    //todo
     /* public void setCobranca() {
          int tipo = this.entretenimento.getTipo();
          // filme

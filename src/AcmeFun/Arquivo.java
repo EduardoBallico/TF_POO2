@@ -113,7 +113,7 @@ public class Arquivo {
                     int anoLancamento = validaInteiro(valores.get(3));
                     int numTemporada = validaInteiro(valores.get(4));
                     int numEpisodio= validaInteiro(valores.get(5));
-                    Serie serie = (Serie) entretenimentos.buscaPorCodigo(valores.get(6));
+                    Serie serie = (Serie) entretenimentos.pesquisaCodigo(valores.get(6));
                     Entretenimento episodio = new EpisodioSerie(codigo,titulo,anoLancamento,numTemporada,numEpisodio,serie);
                     entretenimentos.addEntretenimentoValido(episodio);
                 }
@@ -138,7 +138,7 @@ public class Arquivo {
                 String email = valores.get(2);
                 String codigoEntretenimento = valores.get(3);
                 Cliente cliente = (Cliente) clientes.procuraUsuario(email);
-                Entretenimento entretenimento = entretenimentos.buscaPorCodigo(codigoEntretenimento);
+                Entretenimento entretenimento = entretenimentos.pesquisaCodigo(codigoEntretenimento);
 
                 Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);
                 acessos.adicionaAcesso(acesso);

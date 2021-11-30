@@ -15,9 +15,9 @@ public class CatalogoEntretenimento {
 
     public ArrayList<Entretenimento> getCatalogo() { return entretenimentos; }
 
-    public boolean codigoUnico(Entretenimento entretenimento){
-        for (Entretenimento value : entretenimentos) {
-            if (value.getCodigo().equals(entretenimento.getCodigo())) {
+    public boolean verificaCodigo(Entretenimento entretenimento){
+        for (Entretenimento ent : entretenimentos) {
+            if (ent.getCodigo().equals(entretenimento.getCodigo())) {
                 return false;
             }
         }
@@ -25,7 +25,7 @@ public class CatalogoEntretenimento {
     }
 
     public boolean addEntretenimentoValido(Entretenimento entretenimento){
-        if(codigoUnico(entretenimento)){
+        if(verificaCodigo(entretenimento)){
             entretenimentos.add(entretenimento);
             arquivo.writeFile(persistenciaEntretenimento,entretenimento.toString() + "\n");
             System.out.println("Adicionou e escreveu");
@@ -34,7 +34,7 @@ public class CatalogoEntretenimento {
         return false;
     }
 
-    public Serie buscaSerie(String nome){
+    public Serie pesquisaSerie(String nome){
         ArrayList<Serie> aux = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if (value.getTipo()==3) {
@@ -45,75 +45,68 @@ public class CatalogoEntretenimento {
         return null;
     }
 
-    public ArrayList<String> listaNomeSeries(){
-        ArrayList<String> aux = new ArrayList<>();
+    public ArrayList<String> escreveNomeSerie(){
+        ArrayList<String> list = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if (value.getTipo()==3) {
-                aux.add(value.getTitulo());
+                list.add(value.getTitulo());
             }
         }
-        return aux;
+        return list;
     }
 
-    public ArrayList<Entretenimento> buscaPorTituloCompleto(String titulo){
-        ArrayList<Entretenimento> aux = new ArrayList<>();
+    public ArrayList<Entretenimento> pesquisaTitCompleto(String titulo){
+        ArrayList<Entretenimento> list = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if(value.getTitulo().equals(titulo)){
-                aux.add(value);
+                list.add(value);
             }
         }
-        if(aux.size()==0){
-            return null;
-        }
-        return aux;
+        if(list.size()==0){ return null; }
+        return list;
     }
 
-    public ArrayList<Entretenimento> buscaPorTituloIncompleto(String tituloIncompleto){
-        ArrayList<Entretenimento> aux = new ArrayList<>();
+    public ArrayList<Entretenimento> pesquisaTitIncompleto(String tituloIncompleto){
+        ArrayList<Entretenimento> list = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if(value.getTitulo().contains(tituloIncompleto)){
-                aux.add(value);
+                list.add(value);
             }
         }
-        if(aux.size()==0){
-            return null;
-        }
-
-        return aux;
+        if(list.size()==0){ return null; }
+        return list;
     }
 
-    public ArrayList<Entretenimento> buscaPorAnoLancamento(int anoLancamentoInicio, int anoLancamentoFinal){
-        ArrayList<Entretenimento> aux = new ArrayList<>();
+    public ArrayList<Entretenimento> pesquisaAnoLanc(int anoLancamentoInicio, int anoLancamentoFinal){
+        ArrayList<Entretenimento> list = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if(value.getAnoLancamento() > anoLancamentoInicio && value.getAnoLancamento() < anoLancamentoFinal){
-                aux.add(value);
+                list.add(value);
             }
         }
-
-        if(aux.size()==0){
-            return null;
-        }
-        return aux;
+        if(list.size()==0){ return null; }
+        return list;
     }
 
-    public Entretenimento buscaPorCodigo(String codigo){
-        Entretenimento aux = null;
-        for (Entretenimento value : entretenimentos) {
-            if(value.getCodigo().equals(codigo)){
-                aux = value;
-                return aux;
+    public Entretenimento pesquisaCodigo(String codigo){
+        Entretenimento entC = null;
+        for (Entretenimento ent : entretenimentos) {
+            if(ent.getCodigo().equals(codigo)){
+                entC = ent;
+                return entC;
             }
         }
         return null;
     }
 
+    //todo
     public String relatorioFinalEntretenimento(){
-        String aux = "";
+        String s = "";
         for (Entretenimento value : entretenimentos) {
-                aux+= "Cadastrado Entretenimento: " + value.toString() + "\n";
+                s+= "Cadastrado Entretenimento: " + value.toString() + "\n";
             }
-        if(!aux.equals("")){
-            return aux;
+        if(!s.equals("")){
+            return s;
         } else{
             return null;
         }

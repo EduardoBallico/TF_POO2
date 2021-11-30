@@ -33,6 +33,7 @@ public class Entretenimento {
 
     // dei override nesse metodo em cada uma das subclasses, acredito que assim ele funcione
 
+    //todo
     public int defineTipo(){
         // if(this.getClass().getSimpleName().equals("Filme")){
         //     return 1;
