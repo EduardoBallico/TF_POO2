@@ -42,7 +42,7 @@ public class Arquivo {
                     String senha = valores.get(3);
                     String cpf = valores.get(4);
                     ClienteIndividual clienteIndividualSemEmpresa = new ClienteIndividual(nome,email,senha,cpf,null);
-                    clientes.addClienteValido(clienteIndividualSemEmpresa);
+                    clientes.cadastraCliente(clienteIndividualSemEmpresa);
 
                 }else if(valores.get(0).equals("2")){
                     System.out.println("Cliente 2");
@@ -52,7 +52,7 @@ public class Arquivo {
                     String cnpj = valores.get(4);
                     String nomeFantasia = valores.get(5);
                     ClienteEmpresarial clienteEmpresarial = new ClienteEmpresarial(nome,email,senha,cnpj,nomeFantasia);
-                    clientes.addClienteValido(clienteEmpresarial);
+                    clientes.cadastraCliente(clienteEmpresarial);
 
                 }else if(valores.get(0).equals("3")){
                     System.out.println("Cliente 3");
@@ -61,9 +61,9 @@ public class Arquivo {
                     String senha = valores.get(3);
                     String cpf = valores.get(4);
                     String emailEmpresa = valores.get(5);
-                    ClienteEmpresarial empresa = (ClienteEmpresarial) clientes.buscaUsuarioPorEmail(emailEmpresa);
+                    ClienteEmpresarial empresa = (ClienteEmpresarial) clientes.procuraUsuario(emailEmpresa);
                     ClienteIndividual clienteIndividualComEmpresa = new ClienteIndividual(nome,email,senha,cpf,empresa);
-                    clientes.addClienteValido(clienteIndividualComEmpresa);
+                    clientes.cadastraCliente(clienteIndividualComEmpresa);
                 }
             }
         } catch (IOException e){
@@ -137,7 +137,7 @@ public class Arquivo {
 
                 String email = valores.get(2);
                 String codigoEntretenimento = valores.get(3);
-                Cliente cliente = (Cliente) clientes.buscaUsuarioPorEmail(email);
+                Cliente cliente = (Cliente) clientes.procuraUsuario(email);
                 Entretenimento entretenimento = entretenimentos.buscaPorCodigo(codigoEntretenimento);
 
                 Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);

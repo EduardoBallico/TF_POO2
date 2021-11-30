@@ -1,9 +1,7 @@
 package AcmeFun.cliente;
 
 public class ClienteIndividual extends Cliente{
-
     private String cpf;
-
     private ClienteEmpresarial empresa;
 
     public ClienteIndividual(String nome, String email, String senha, String cpf, ClienteEmpresarial empresa) {
@@ -11,7 +9,8 @@ public class ClienteIndividual extends Cliente{
         this.cpf = cpf;
         this.empresa = empresa;
         // tive que chamar o defineTipo aqui pois ele tava pegando 1 por chamar no super antes de atribuir a empresa
-        this.tipo = defineTipo();
+        //todo
+        //this.tipo = defineTipo();
     }
 
     public String getCpf() {

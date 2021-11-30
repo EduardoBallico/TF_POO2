@@ -21,7 +21,7 @@ public class Main {
 
         Administrador adm = new Administrador("administracao@mail.com","admin123");
 
-        catalogoUsuarios.addClienteValido(adm);
+        catalogoUsuarios.cadastraCliente(adm);
 
         Arquivo arquivo = new Arquivo();
         arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());

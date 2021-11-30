@@ -8,15 +8,15 @@ import java.util.ArrayList;
 public class CatalogoUsuarios {
 
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
-    private static Arquivo arquivo = new Arquivo();
-    private static File persistenciaClientes = new File(
+    private static Arquivo arqv = new Arquivo();
+    private static File fileCliente = new File(
             "src/main/resources/com/example/trabalhofinal2/arquivos/persistencia-clientes.dat");
 
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public boolean encontraEmailUsuario(Usuario usuario){
+    public boolean verificaUsuario(Usuario usuario){
         for (Usuario value : usuarios) {
             if (value.getEmail().equals(usuario.getEmail())) {
                 return true;
@@ -25,7 +25,7 @@ public class CatalogoUsuarios {
         return false;
     }
 
-    public Usuario buscaUsuarioPorEmail(String email){
+    public Usuario procuraUsuario(String email){
         for (Usuario value : usuarios) {
             if (value.getEmail().equals(email)) {
                 return value;
@@ -34,8 +34,9 @@ public class CatalogoUsuarios {
         return null;
     }
 
+    //todo
     public boolean validaSenhaUsuario(Usuario usuario){
-        Usuario aux = buscaUsuarioPorEmail(usuario.getEmail());
+        Usuario aux = procuraUsuario(usuario.getEmail());
         if(aux.getSenha().equals(usuario.getSenha())){
             return true;
         }else{
@@ -43,24 +44,17 @@ public class CatalogoUsuarios {
         }
     }
 
-    public boolean usuarioDisponivel(Usuario usuario){
-        if(encontraEmailUsuario(usuario)) {
-            return false;
-        }else{
-            return true;
-        }
-    }
 
-    public boolean addClienteValido(Usuario usuario){
-        if(usuarioDisponivel(usuario)){
+    public boolean cadastraCliente(Usuario usuario){
+        if(!verificaUsuario(usuario)){
             usuarios.add(usuario);
-            arquivo.writeFile(persistenciaClientes,usuario.toString() + "\n");
+            arqv.writeFile(fileCliente,usuario.toString() + "\n");
             return true;
         }
             return false;
         }
 
-    public ArrayList<ClienteIndividual> listaClientesIndividuais(){
+    public ArrayList<ClienteIndividual> clientesIndividuais(){
         ArrayList<ClienteIndividual> aux = new ArrayList<>();
         for (Usuario value : usuarios) {
             if (value.defineTipo()==3 || value.defineTipo()==1) {
@@ -69,7 +63,7 @@ public class CatalogoUsuarios {
         }
         return aux;
     }
-     public ArrayList<ClienteIndividual> listaClientesIndividuaisComEmpresa(){
+     public ArrayList<ClienteIndividual> clientesIndividuaisVinculados(){
          ArrayList<ClienteIndividual> aux = new ArrayList<>();
          for (Usuario value : usuarios) {
              if (value.defineTipo()==3) {
@@ -79,7 +73,7 @@ public class CatalogoUsuarios {
          return aux;
      }
 
-    public ArrayList<ClienteIndividual> listaClientesIndividuaisSemEmpresa(){
+    public ArrayList<ClienteIndividual> clientesIndividuaisNaoVinculados(){
         ArrayList<ClienteIndividual> aux = new ArrayList<>();
         for (Usuario value : usuarios) {
             if (value.defineTipo()==1) {
@@ -89,7 +83,7 @@ public class CatalogoUsuarios {
         return aux;
     }
 
-     public ArrayList<ClienteEmpresarial> listaClientesEmpresariais(){
+     public ArrayList<ClienteEmpresarial> clientesEmpresariais(){
          ArrayList<ClienteEmpresarial> aux = new ArrayList<>();
          for (Usuario value : usuarios) {
              if (value.defineTipo()==2) {
@@ -99,6 +93,7 @@ public class CatalogoUsuarios {
          return aux;
      }
 
+     //todo
      public boolean emailValido(String email){
          for (Usuario value : usuarios) {
              if (value.getEmail().equals(email)) {
@@ -108,27 +103,12 @@ public class CatalogoUsuarios {
          return true;
      }
 
-     public boolean cpfValido(String cpf){
-        ArrayList<ClienteIndividual> clientes = listaClientesIndividuais();
-        for(ClienteIndividual value : clientes){
-            if(value.getCpf().equals(cpf)){
-                return false;
-            }
-        }
-        return true;
-     }
+    //todo
+    public File getPersistenciaClientes() {
+        return fileCliente;
+    }
 
-     public boolean cnpjInvalido(String cnpj){
-        ArrayList<ClienteEmpresarial> clientes = listaClientesEmpresariais();
-        for(ClienteEmpresarial value : clientes){
-            if(value.getCnpj().equals(cnpj)){
-                return false;
-            }
-        }
-        return true;
-     }
-
-    public String relatorioFinalClientes(){
+    public String toString() {
         String aux = "";
         for (Usuario value : usuarios) {
             aux+= "Cadastrado Cliente: " + value.toString() + "\n";
@@ -138,14 +118,6 @@ public class CatalogoUsuarios {
         } else{
             return null;
         }
-    }
-
-    public File getPersistenciaClientes() {
-        return persistenciaClientes;
-    }
-
-    public String toString() {
-        return "\n";
     }
 }
 

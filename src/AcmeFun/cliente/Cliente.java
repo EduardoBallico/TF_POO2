@@ -3,13 +3,10 @@ package AcmeFun.cliente;
 import AcmeFun.acesso.Acesso;
 
 import java.util.ArrayList;
-
+//todo remover cliente
 public class Cliente extends Usuario {
-
     private String nome;
-    
-    protected int tipo;
-
+    private int tipo;
     private ArrayList<Acesso> acessos;
     
     public Cliente(String email, String senha, String nome) {
@@ -27,7 +24,7 @@ public class Cliente extends Usuario {
         return tipo;
     }
 
-
+    //todo
     public ArrayList<Acesso> getAcessosDaqueleMes(int ano, int mes){
         ArrayList<Acesso> resultado = new ArrayList<>();
         for (Acesso acesso : acessos) {
@@ -42,11 +39,8 @@ public class Cliente extends Usuario {
         double valorFinal = 0;
         for (Acesso acesso : getAcessosDaqueleMes(ano, mes)) {
             int tipo = acesso.getEntretenimento().getTipo();
-            // filme
             if(tipo == 1 ) valorFinal += 6;
-            // episodio serie
             else if(tipo == 4 ) valorFinal += 4;
-            // jogo
             else if(tipo == 2 ) valorFinal += 8;
         }
         return valorFinal;
