@@ -5,6 +5,7 @@ import AcmeFun.acesso.CatalogoAcesso;
 import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -232,18 +233,23 @@ public class Main {
                     String pesquisa = in.nextLine();
 
                     switch (tipo){
-                        case "1" -> {
-                            catalogoEntretenimento.pesquisaCodigo(pesquisa);
+                        case "1" -> catalogoEntretenimento.pesquisaCodigo(pesquisa);
+                        case "2" -> catalogoEntretenimento.pesquisaTitulo(pesquisa);
+                        case "3" -> catalogoEntretenimento.pesquisaAnoLanc(Integer.parseInt(pesquisa));
+                        default -> System.out.println("Tipo informado incorreto!");
+                    }
+                    switch (ordem){
+                        case "1" -> catalogoEntretenimento.ordenaTitulo();
+                        case "2" -> catalogoEntretenimento.ordenaAno();
+                        default -> System.out.println("Ordenação informada incorreta!");
+                    }
+                    try{
+                        for(Entretenimento e : catalogoEntretenimento.getUltimaConsulta()){
+                            System.out.println(e.getCodigo() + ", " + e.getTitulo());
                         }
-                        case "2" -> {
-                            catalogoEntretenimento.pesquisaTitulo(pesquisa);
-                        }
-                        case "3" -> {
-
-                        }
-                        default -> {
-                            System.out.println("Dados informados incorretos!");
-                        }
+                    }
+                    catch (NullPointerException e){
+                        System.out.println("Não foram encontrados resultados para a pesquisa");
                     }
                 }
                 case "2" -> {

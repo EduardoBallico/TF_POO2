@@ -4,6 +4,7 @@ import AcmeFun.Arquivo;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CatalogoEntretenimento {
 
@@ -11,7 +12,13 @@ public class CatalogoEntretenimento {
     private ArrayList<Entretenimento> ultimaConsulta = null;
 
     public ArrayList<Entretenimento> getEntretenimentos() { return entretenimentos; }
-    public ArrayList<Entretenimento> getUltimaConsulta() { return ultimaConsulta; }
+
+    public ArrayList<Entretenimento> getUltimaConsulta() throws NullPointerException {
+        if (ultimaConsulta == null){
+            throw new NullPointerException();
+        }
+        return ultimaConsulta;
+    }
 
     public boolean verificaCodigo(Entretenimento entretenimento){
         for (Entretenimento ent : entretenimentos) {
@@ -22,7 +29,6 @@ public class CatalogoEntretenimento {
         return true;
     }
 
-    // Feshow
     public boolean addEntretenimento(Entretenimento entretenimento, boolean isLoadingFromFile){
         if(verificaCodigo(entretenimento)){
             entretenimentos.add(entretenimento);
@@ -36,29 +42,7 @@ public class CatalogoEntretenimento {
         return false;
     }
 
-    public Serie pesquisaSerie(String nome){
-        ArrayList<Serie> aux = new ArrayList<>();
-        for (Entretenimento value : entretenimentos) {
-            if (value.getTipo()==3) {
-                if(value.getTitulo().equals(nome))
-                    return (Serie) value;
-            }
-        }
-        return null;
-    }
-
-    public ArrayList<String> escreveNomeSerie(){
-        ArrayList<String> list = new ArrayList<>();
-        for (Entretenimento value : entretenimentos) {
-            if (value.getTipo()==3) {
-                list.add(value.getTitulo());
-            }
-        }
-        return list;
-    }
-
     public ArrayList<Entretenimento> pesquisaTitulo(String titulo){
-
         ultimaConsulta = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if(value.getTitulo().equals(titulo)
@@ -71,25 +55,76 @@ public class CatalogoEntretenimento {
     }
 
     public ArrayList<Entretenimento> pesquisaAnoLanc(int anoLancamento){
-        ArrayList<Entretenimento> list = new ArrayList<>();
+        ultimaConsulta = new ArrayList<>();
         for (Entretenimento value : entretenimentos) {
             if(value.getAnoLancamento() > anoLancamento && value.getAnoLancamento() < anoLancamento){
-                list.add(value);
+                ultimaConsulta.add(value);
             }
         }
-        if(list.size()==0){ return null; }
-        return list;
+        if(ultimaConsulta.isEmpty()){ return null; }
+        return ultimaConsulta;
     }
 
     public Entretenimento pesquisaCodigo(String codigo){
-        Entretenimento entC = null;
+        ultimaConsulta = new ArrayList<>();
         for (Entretenimento ent : entretenimentos) {
             if(ent.getCodigo().equals(codigo)){
-                entC = ent;
-                return entC;
+                ultimaConsulta.add(ent);
+                return ultimaConsulta.get(0);
             }
         }
         return null;
+    }
+
+    public ArrayList<Entretenimento> ordenaTitulo(){
+
+        ArrayList<String> array = new ArrayList<>();
+        for(Entretenimento ent : ultimaConsulta){
+            array.add(ent.getTitulo());
+        }
+
+        Collections.sort(array);
+
+        ArrayList<Entretenimento> aux = new ArrayList<>();
+        for (String s : array){
+            for (Entretenimento e : entretenimentos){
+                if (e.getTitulo().equals(s)){
+                    aux.add(e);
+                    ultimaConsulta.remove(e);
+                }
+            }
+        }
+
+        ultimaConsulta = new ArrayList<>();
+        ultimaConsulta.addAll(aux);
+
+        if(ultimaConsulta.isEmpty()){ return null; }
+        return ultimaConsulta;
+    }
+
+    public ArrayList<Entretenimento> ordenaAno() {
+        ArrayList<Integer> array = new ArrayList<>();
+        for (Entretenimento ent : ultimaConsulta) {
+            array.add(ent.getAnoLancamento());
+        }
+
+        Collections.sort(array);
+
+        ArrayList<Entretenimento> aux = new ArrayList<>();
+        for (Integer i : array) {
+            for (Entretenimento e : ultimaConsulta) {
+                if (e.getAnoLancamento() == i) {
+                    aux.add(e);
+                    ultimaConsulta.remove(e);
+                }
+            }
+        }
+
+        ultimaConsulta = new ArrayList<>();
+        ultimaConsulta.addAll(aux);
+
+        if (ultimaConsulta.isEmpty()) { return null; }
+        return ultimaConsulta;
     }
 
     //todo
