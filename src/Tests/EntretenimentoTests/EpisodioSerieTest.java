@@ -15,8 +15,8 @@ class EpisodioSerieTest {
 
     @BeforeEach
     public void start(){
-         eps = new EpisodioSerie("111","Friends",1900,1,10,serie);
-         serie = new Serie("111", "Friends", 1990, 2020);
+        serie = new Serie("111", "Friends", 1990, 2020);
+        eps = new EpisodioSerie("111","Friends",1900,1,10,serie);
     }
 
     @org.junit.jupiter.api.Test
@@ -38,7 +38,7 @@ class EpisodioSerieTest {
     //todo
     @org.junit.jupiter.api.Test
     void testToString() {
-        //assertEquals(eps.toString(),null);
+        assertEquals(eps.toString(),"4;111;Friends;1900;1;10;111\n");
     }
 
     @org.junit.jupiter.api.Test
