@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ListaDeUsuariosTest {
 
     @Test
-    void getUsuarios() {
-    }
-
-    @Test
     void verificaUsuario() {
     }
 

@@ -12,18 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ListaDeEntretenimentoTest {
 
-    Filme f;
+    Filme f1;
+    Filme f2;
+    Filme f3;
     ListaDeEntretenimento lE;
 
     @BeforeEach
     public void start() {
-        f = new Filme("F01", "focco", 2000, 140);
+        f1 = new Filme("F05", "focco", 2000, 140);
+        f2 = new Filme("F06", "mts", 2000, 120);
+        f3 = new Filme("F07", "focco", 2002, 120);
         lE = new ListaDeEntretenimento();
-    }
-
-    @Test
-    void getEntretenimentos() {
-        //todo
     }
 
     @Test
@@ -36,49 +35,64 @@ class ListaDeEntretenimentoTest {
 
     @Test
     void addEntretenimento() {
+        Filme f = new Filme("F0","teste",2100,150);
         assertTrue(lE.addEntretenimento(f,false));
     }
 
-    //todo
     @Test
     void pesquisaTitulo() {
         ArrayList<Entretenimento> ent = new ArrayList<>();
-        ent.add(f);
-        lE.addEntretenimento(f,false);
-        assertEquals(lE.pesquisaTitulo("focco"), ent.get(0));
+        ent.add(f1);
+        lE.addEntretenimento(f1,false);
+        lE.pesquisaTitulo("focco");
+        assertEquals(lE.getUltimaConsulta().get(0).toString(), ent.get(0).toString());
     }
 
-    //todo
     @Test
     void pesquisaAnoLanc() {
         ArrayList<Entretenimento> ent = new ArrayList<>();
-        ent.add(f);
-        lE.addEntretenimento(f,false);
-        assertEquals(lE.pesquisaAnoLanc(2000), ent.get(0));
+        ent.add(f1);
+        lE.addEntretenimento(f1,false);
+        assertEquals(lE.pesquisaAnoLanc(2000).get(0).toString(), ent.get(0).toString());
     }
 
-    //todo
     @Test
     void pesquisaCodigo() {
-        ArrayList<Entretenimento> ent = new ArrayList<>();
-        ent.add(f);
-        lE.addEntretenimento(f,false);
-        assertEquals(lE.pesquisaCodigo("F01"), ent.get(0));
+
+        lE.addEntretenimento(f1,false);
+        assertEquals(lE.pesquisaCodigo("F05"), f1);
     }
 
-    //todo
     @Test
     void ordenaTitulo() {
+        ArrayList<Entretenimento> ent = new ArrayList<>();
+        ent.add(f1);
+        ent.add(f2);
+
+        lE.addEntretenimento(f2,false);
+        lE.addEntretenimento(f1,false);
+        lE.pesquisaAnoLanc(2000);
+
+        assertEquals(f1.toString(), lE.ordenaTitulo().get(0).toString());
     }
 
     //todo
     @Test
     void ordenaAno() {
+        ArrayList<Entretenimento> ent = new ArrayList<>();
+        ent.add(f1);
+        ent.add(f3);
+
+        lE.addEntretenimento(f2,false);
+        lE.addEntretenimento(f1,false);
+        lE.pesquisaTitulo("focco");
+
+        assertEquals(f1, lE.ordenaAno().get(0));
     }
 
     @Test
     void testToString() {
-        lE.addEntretenimento(f,false);
-        assertEquals(lE.toString(),"Cadastrado Entretenimento: 1;F01;focco;2000;140\n\n");
+        lE.addEntretenimento(f1,false);
+        assertEquals(lE.toString(),"Cadastrado Entretenimento: 1;F05;focco;2000;140\n\n");
     }
 }
