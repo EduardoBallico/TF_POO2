@@ -6,7 +6,7 @@ public class Serie extends Entretenimento{
 
     private int anoConclusao;
 
-    private ArrayList<EpisodioSerie> episodios;
+    private ArrayList<EpisodioSerie> episodios = new ArrayList<>();
 
     public Serie(String codigo, String titulo, int anoLancamento, int anoConclusao) {
         super(codigo, titulo, anoLancamento);

@@ -34,7 +34,8 @@ public class EpisodioSerie extends Entretenimento{
                 getTitulo() + ";" +
                 getAnoLancamento() + ";" +
                 getNumTemporada() + ";" +
-                getNumEpisodio() + getSerie().getCodigo();
+                getNumEpisodio() + ";" +
+                getSerie().getCodigo();
     }
 
     @Override

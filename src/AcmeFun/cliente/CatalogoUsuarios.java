@@ -14,8 +14,8 @@ public class CatalogoUsuarios {
     }
 
     public boolean verificaUsuario(Usuario usuario){
-        for (Usuario value : usuarios) {
-            if (value.getEmail().equals(usuario.getEmail())) {
+        for (Usuario usu : usuarios) {
+            if (usu.getEmail().equals(usuario.getEmail())) {
                 return true;
             }
         }
@@ -23,22 +23,12 @@ public class CatalogoUsuarios {
     }
 
     public Usuario procuraUsuario(String email){
-        for (Usuario value : usuarios) {
-            if (value.getEmail().equals(email)) {
-                return value;
+        for (Usuario usu : usuarios) {
+            if (usu.getEmail().equals(email)) {
+                return usu;
             }
         }
         return null;
-    }
-
-    //todo
-    public boolean validaSenhaUsuario(Usuario usuario){
-        Usuario aux = procuraUsuario(usuario.getEmail());
-        if(aux.getSenha().equals(usuario.getSenha())){
-            return true;
-        }else{
-            return false;
-        }
     }
 
     public boolean cadastraCliente(Usuario usuario, boolean isLoadingFromFile){
@@ -93,16 +83,6 @@ public class CatalogoUsuarios {
          return aux;
      }
 
-     //todo
-     public boolean emailValido(String email){
-         for (Usuario value : usuarios) {
-             if (value.getEmail().equals(email)) {
-                 return false;
-             }
-         }
-         return true;
-     }
-
     public String toString() {
         String aux = "";
         for (Usuario value : usuarios) {
@@ -115,8 +95,3 @@ public class CatalogoUsuarios {
         }
     }
 }
-
-
-
-
-

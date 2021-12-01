@@ -69,7 +69,7 @@ public class Main {
                         System.out.println("Usuario Invalido!");
                     }
                 }
-                case "2" -> {
+                case "0" -> {
                     System.out.println("Programa finalizado!");
                     System.exit(130);
                 }
@@ -99,15 +99,17 @@ public class Main {
 
                     Cliente cli = null;
 
-                    while (true) {
+                    boolean flag = true;
+                    while (flag) {
                         switch (tipo){
                             case "1" ->{
+
                                 System.out.println("Informe o CPF do usuário que deseja registrar: ");
                                 String cpf = in.nextLine();
 
                                 cli = new ClienteIndividual(nome, email, senha, cpf, null);
                                 catalogoUsuarios.cadastraCliente(cli, false);
-                                break;
+                                flag = false;
                             }
                             case "2" ->{
                                 System.out.println("Informe o CPF do usuário que deseja registrar: ");
@@ -118,7 +120,7 @@ public class Main {
                                 ClienteEmpresarial cliEmp = (ClienteEmpresarial) catalogoUsuarios.procuraUsuario(empresa);
                                 cli = new ClienteIndividual(nome, email, senha, cpf, cliEmp);
                                 catalogoUsuarios.cadastraCliente(cli, false);
-                                break;
+                                flag = false;
                             }
                             case "3" -> {
                                 System.out.println("Informe o CNPJ da empresa que deseja registrar: ");
@@ -128,7 +130,7 @@ public class Main {
 
                                 cli = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
                                 catalogoUsuarios.cadastraCliente(cli, false);
-                                break;
+                                flag = false;
                             }
                             default ->
                                     System.out.println("Opção invalida!");
@@ -149,7 +151,8 @@ public class Main {
 
                     Entretenimento ent = null;
 
-                    while (true) {
+                    boolean flag = true;
+                    while (flag) {
                         switch (tipo){
                             case "1" ->{
                                 System.out.println("Informe a duração do filme que deseja registrar: ");
@@ -157,7 +160,7 @@ public class Main {
 
                                 ent = new Filme(codigo, titulo, anoLanc, duracao);
                                 catalogoEntretenimento.addEntretenimento(ent, false);
-                                break;
+                                flag = false;
                             }
                             case "2" ->{
                                 System.out.println("Informe o título original do jogo que deseja registrar: ");
@@ -167,7 +170,7 @@ public class Main {
 
                                 ent = new Jogo(codigo, titulo, anoLanc, tituloOriginal, genero);
                                 catalogoEntretenimento.addEntretenimento(ent, false);
-                                break;
+                                flag = false;
                             }
                             case "3" -> {
                                 System.out.println("Informe o ano de conclusão que deseja registrar: ");
@@ -175,7 +178,7 @@ public class Main {
 
                                 ent = new Serie(codigo,titulo,anoLanc,anoConc);
                                 catalogoEntretenimento.addEntretenimento(ent, false);
-                                break;
+                                flag = false;
                             }
                             case "4" -> {
                                 System.out.println("Informe de que temporada é o episódio que deseja registrar: ");
@@ -189,7 +192,7 @@ public class Main {
                                 EpisodioSerie episodio = new EpisodioSerie(codigo, titulo, anoLanc, numTemporada, numEpisodio, serie);
                                 catalogoEntretenimento.addEntretenimento(episodio, false);
                                 serie.linkaEp(episodio);
-                                break;
+                                flag = false;
                             }
                             default ->
                                     System.out.println("Opção invalida!");
@@ -197,13 +200,13 @@ public class Main {
                     }
                 }
                 case "3" -> {
-
+                    // Consultar acessos mensais
                 }
                 case "4"-> {
-
+                    // Simular carga de dados
                 }
                 case "0" -> {
-                    System.out.println("Sistema Finalizado");
+                    System.out.println("Sistema finalizado. Obrigado por utilizar nosso programa.");
                     return;
                 }
                 default -> System.out.println("Opção invalida!");
