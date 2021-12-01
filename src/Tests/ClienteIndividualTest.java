@@ -42,6 +42,6 @@ class ClienteIndividualTest {
 
     @Test
     void defineTipo() {
-        assertEquals(cV.defineTipo(), 3);
+        assertEquals(cV.getTipo(), "3");
     }
 }
