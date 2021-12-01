@@ -2,18 +2,13 @@ package AcmeFun.cliente;
 
 import AcmeFun.Arquivo;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class ListaDeUsuarios {
 
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
 
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public boolean verificaUsuario(Usuario usuario){
+    public boolean exiteUsuario(Usuario usuario){
         for (Usuario usu : usuarios) {
             if (usu.getEmail().equals(usuario.getEmail())) {
                 return true;
@@ -32,7 +27,7 @@ public class ListaDeUsuarios {
     }
 
     public boolean cadastraCliente(Usuario usuario, boolean isLoadingFromFile){
-        if(!verificaUsuario(usuario)){
+        if(!exiteUsuario(usuario)){
             usuarios.add(usuario);
             if(!isLoadingFromFile){
                 Arquivo.writeFile(Arquivo.getArquivoClientes(),usuario.toString() + "\n");

@@ -9,8 +9,6 @@ public class ListaDeAcesso {
 
     private final static ArrayList<Acesso> acessos = new ArrayList<>();
 
-    public ArrayList<Acesso> getCatalogo() { return acessos; }
-
     public boolean adicionaAcesso(Acesso acesso, boolean isLoadingFromFile){
         acessos.add(acesso);
         if(!isLoadingFromFile){

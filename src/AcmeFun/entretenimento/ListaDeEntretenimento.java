@@ -11,8 +11,6 @@ public class ListaDeEntretenimento {
     private final static ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
     private ArrayList<Entretenimento> ultimaConsulta = null;
 
-    public ArrayList<Entretenimento> getEntretenimentos() { return entretenimentos; }
-
     public ArrayList<Entretenimento> getUltimaConsulta() throws NullPointerException {
         if (ultimaConsulta == null){
             throw new NullPointerException();

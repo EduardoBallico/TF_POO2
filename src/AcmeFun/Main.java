@@ -38,7 +38,7 @@ public class Main {
         listaDeUsuarios.cadastraCliente(adm, false);
 
         Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());
-        Arquivo.readFileCliente(Arquivo.getArquivoClientes(), false);
+        Arquivo.readFileCliente(Arquivo.getArquivoClientes());
         Arquivo.readFileAcessos(Arquivo.getArquivoAcessos());
     }
 
@@ -226,7 +226,7 @@ public class Main {
                     System.out.println("Valor total de todos os acessos: "+ d);
                  }
                 case "4"-> {
-                    Arquivo.readFileCliente(Arquivo.getArquivoClientes(), true);
+                    Arquivo.simulaCarga();
                 }
                 case "0" -> {
                     System.out.println("Sistema finalizado. Obrigado por utilizar nosso programa.");
