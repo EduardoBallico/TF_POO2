@@ -192,4 +192,6 @@ public class Arquivo {
         return arquivoAcessos;
     }
 
+
+
 }

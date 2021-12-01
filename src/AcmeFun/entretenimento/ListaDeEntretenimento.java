@@ -56,9 +56,9 @@ public class ListaDeEntretenimento {
 
     public ArrayList<Entretenimento> pesquisaAnoLanc(int anoLancamento){
         ultimaConsulta = new ArrayList<>();
-        for (Entretenimento value : entretenimentos) {
-            if(value.getAnoLancamento() > anoLancamento && value.getAnoLancamento() < anoLancamento){
-                ultimaConsulta.add(value);
+        for (Entretenimento ent : entretenimentos) {
+            if(ent.getAnoLancamento() == anoLancamento){
+                ultimaConsulta.add(ent);
             }
         }
         if(ultimaConsulta.isEmpty()){ return null; }

@@ -225,9 +225,8 @@ public class Main {
                     double d = listaDeAcesso.getCobrancaTotal(ano,mes);
                     System.out.println("Valor total de todos os acessos: "+ d);
                  }
-
                 case "4"-> {
-
+                    Arquivo.readFileCliente(Arquivo.getArquivoClientes(), true);
                 }
                 case "0" -> {
                     System.out.println("Sistema finalizado. Obrigado por utilizar nosso programa.");
