@@ -44,6 +44,12 @@ class SerieTest {
     }
 
     @Test
+    void getPreco() {
+        serie.linkaEp(epSerie);
+        assertEquals(serie.getPreco(),4);
+    }
+
+    @Test
     void getTipo() {
         assertEquals(serie.getTipo(),"3");
     }
