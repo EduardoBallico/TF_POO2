@@ -2,45 +2,50 @@ package Tests;
 
 import AcmeFun.cliente.ClienteEmpresarial;
 import AcmeFun.cliente.ClienteIndividual;
+import AcmeFun.entretenimento.EpisodioSerie;
+import AcmeFun.entretenimento.Serie;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EpisodioSerieTest {
 
-    ClienteEmpresarial cE;
-    ClienteIndividual cN;
-    ClienteIndividual cV;
+    EpisodioSerie eps;
+    Serie serie;
 
     @BeforeEach
     public void start(){
-        cE = new ClienteEmpresarial("Focco", "focco@f.com", "123", "12123123123333", "Focco Solucoes");
-        cN = new ClienteIndividual("mts", "mts@email.com","mts", "12312312311", null);
-        cV = new ClienteIndividual("mts", "mts@email.com","mts", "12312312311", cE);
+         eps = new EpisodioSerie("111","Friends",1900,1,10,serie);
+         serie = new Serie("111", "Friends", 1990, 2020);
     }
 
     @org.junit.jupiter.api.Test
     void getNumTemporada() {
-        //assertEquals();
+        assertEquals(eps.getNumTemporada(),1);
     }
 
     @org.junit.jupiter.api.Test
     void getNumEpisodio() {
-        //assertEquals();
+        assertEquals(eps.getNumEpisodio(),10);
     }
 
     @org.junit.jupiter.api.Test
     void getSerie() {
-        //assertEquals();
+        assertEquals(eps.getSerie(),null);
     }
 
     @org.junit.jupiter.api.Test
     void testToString() {
-        //assertEquals();
+        assertEquals(serie.toString(),"3;111;Friends;1990;2020\n");
     }
 
     @org.junit.jupiter.api.Test
     void getTipo() {
-        //assertEquals();
+        assertEquals(serie.getTipo(),"3");
+    }
+
+    @org.junit.jupiter.api.Test
+    void getPreco() {
+        assertEquals(serie.getPreco(),0);
     }
 }

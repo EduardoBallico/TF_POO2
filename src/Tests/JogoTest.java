@@ -12,7 +12,6 @@ class JogoTest {
 
     Jogo jogo;
 
-
     @BeforeEach
     public void start() {
         jogo = new Jogo("222","COD",2000,"Call Of Duty","Shooter");
