@@ -86,10 +86,10 @@ public class ListaDeAcesso {
         }
         if(!aux.toString().equals("")){
             return aux.toString();
-        } else{
+        }
+        else{
             return null;
         }
     }
-
 }
 

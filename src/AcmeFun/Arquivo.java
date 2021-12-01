@@ -23,9 +23,7 @@ public class Arquivo {
     private static File arquivoAcessos = new File(
             "src/data/TESTE-acessos.dat");
 
-    public static void readFileCliente(File strFile){
-
-        ListaDeUsuarios u = new ListaDeUsuarios();
+    public static ListaDeUsuarios readFileCliente(File strFile, ListaDeUsuarios u){
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
             while(buffRead.ready()) {
@@ -67,12 +65,12 @@ public class Arquivo {
             }
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
         }
+        return u;
     }
 
-    public static void readFileEntretenimento(File strFile){
-
-        ListaDeEntretenimento e = new ListaDeEntretenimento();
+    public static ListaDeEntretenimento readFileEntretenimento(File strFile, ListaDeEntretenimento e){
 
         try(BufferedReader buffRead = new BufferedReader(new FileReader(strFile))){
             while(buffRead.ready()) {
@@ -122,14 +120,12 @@ public class Arquivo {
             }
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
         }
+        return e;
     }
 
-    public static void readFileAcessos(File strFile){
-
-        ListaDeEntretenimento e = new ListaDeEntretenimento();
-        ListaDeUsuarios u = new ListaDeUsuarios();
-        ListaDeAcesso a = new ListaDeAcesso();
+    public static ListaDeAcesso readFileAcessos(File strFile, ListaDeAcesso a, ListaDeEntretenimento e, ListaDeUsuarios u){
 
         try(BufferedReader buffRead = new BufferedReader(new FileReader(strFile))){
             while(buffRead.ready()) {
@@ -148,12 +144,13 @@ public class Arquivo {
 
                 Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);
                 a.adicionaAcesso(acesso, true);
-                System.out.println("Acesso Cadastrado");
             }
 
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
         }
+        return a;
     }
 
     public static void writeFile(File strFile, String strData){
@@ -177,23 +174,29 @@ public class Arquivo {
         return arquivoAcessos;
     }
 
-    public static void simulaCarga(){
-        readFileClienteSim();
-        readFileEntretenimentoSim();
-        readFileAcessoSim();
-    }
-    /*
-        System.out.println("Abrindo Arquivo...");
-        System.out.println("Arquivo Aberto!");
-        System.out.println("Lendo Linha...");
-        System.out.println("Cliente Individual não vinculado identificado");
-        System.out.println("Cliente Individual não vinculado importado");
-     */
+    public static void simulaCarga(String arquivo, String tipo, ListaDeUsuarios simCli, ListaDeEntretenimento simEnt, ListaDeAcesso simAcs){
+        switch (tipo){
+            case "1" -> {
+                simCli = readFileClienteSim(arquivo, simCli);
+                System.out.println(simCli);
+            }
+            case "2" -> {
+                simEnt = readFileEntretenimentoSim(arquivo, simEnt);
+                System.out.println(simEnt);
+            }
+            case "3" -> {
+                simAcs = readFileAcessoSim(arquivo, simAcs, simCli, simEnt);
+                System.out.println(simAcs);
+            }
+            default -> System.out.println("Tipo informado incorreto!");
+        }
 
-    public static void readFileClienteSim(){
-        ListaDeUsuarios u = new ListaDeUsuarios();
+    }
+
+    public static ListaDeUsuarios readFileClienteSim(String file, ListaDeUsuarios u){
         System.out.println("Abrindo Arquivo...");
-        try(BufferedReader buffRead = new BufferedReader(new FileReader(arquivoClientes))){
+        File arquivo = new File(file);
+        try(BufferedReader buffRead = new BufferedReader(new FileReader(arquivo))){
             System.out.println("Arquivo Aberto!");
             while(buffRead.ready()) {
                 System.out.println("Lendo Linha...");
@@ -210,6 +213,7 @@ public class Arquivo {
                         String senha = valores.get(3);
                         String cpf = valores.get(4);
                         ClienteIndividual individualSemEmpresa = new ClienteIndividual(nome, email, senha, cpf, null);
+                        u.cadastraCliente(individualSemEmpresa, true);
                         System.out.println("Cliente Individual não vinculado importado");
                     }
                     case "2" -> {
@@ -220,6 +224,7 @@ public class Arquivo {
                         String cnpj = valores.get(4);
                         String nomeFantasia = valores.get(5);
                         ClienteEmpresarial empresarial = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
+                        u.cadastraCliente(empresarial, true);
                         System.out.println("Cliente Individual não vinculado importado");
                     }
                     case "3" -> {
@@ -232,18 +237,22 @@ public class Arquivo {
                         ClienteEmpresarial empresa = (ClienteEmpresarial) u.procuraUsuario(emailEmpresa);
                         ClienteIndividual individualComEmpresa = new ClienteIndividual(nome, email, senha, cpf, empresa);
                         empresa.adicionaColaborador(individualComEmpresa);
+                        u.cadastraCliente(individualComEmpresa, true);
                         System.out.println("Cliente Individual não vinculado importado");
                     }
                 }
             }
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
         }
+        return u;
     }
-    public static void readFileEntretenimentoSim(){
+
+    public static ListaDeEntretenimento readFileEntretenimentoSim(String file, ListaDeEntretenimento e){
         System.out.println("Abrindo Arquivo...");
-        ListaDeEntretenimento e = new ListaDeEntretenimento();
-        try(BufferedReader buffRead = new BufferedReader(new FileReader(arquivoEntretenimentos))){
+        File arquivo = new File(file);
+        try(BufferedReader buffRead = new BufferedReader(new FileReader(arquivo))){
             System.out.println("Arquivo Aberto!");
             while(buffRead.ready()) {
                 System.out.println("Lendo Linha...");
@@ -264,7 +273,7 @@ public class Arquivo {
                         System.out.println("Filme importado");
                     }
                     case "2" -> {
-                        System.out.println(" identificado");
+                        System.out.println("Jogo identificado");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
@@ -272,20 +281,20 @@ public class Arquivo {
                         String genero = valores.get(5);
                         Entretenimento jogo = new Jogo(codigo, titulo, anoLancamento, tituloOriginal, genero);
                         e.addEntretenimento(jogo, true);
-                        System.out.println("Cliente Individual não vinculado importado");
+                        System.out.println("Jogo importado");
                     }
                     case "3" -> {
-                        System.out.println("Cliente Individual não vinculado identificado");
+                        System.out.println("Serie identificado");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
                         int anoConclusao = Integer.parseInt(valores.get(4));
                         Entretenimento serie = new Serie(codigo, titulo, anoLancamento, anoConclusao);
                         e.addEntretenimento(serie, true);
-                        System.out.println("Cliente Individual não vinculado importado");
+                        System.out.println("Serie importado");
                     }
                     case "4" -> {
-                        System.out.println("Cliente Individual não vinculado identificado");
+                        System.out.println("Episodio identificado");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
@@ -295,16 +304,47 @@ public class Arquivo {
                         EpisodioSerie episodio = new EpisodioSerie(codigo, titulo, anoLancamento, numTemporada, numEpisodio, serie);
                         e.addEntretenimento(episodio, true);
                         serie.linkaEp(episodio);
-                        System.out.println("Cliente Individual não vinculado importado");
+                        System.out.println("Episodio importado");
                     }
                 }
             }
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
         }
+        return e;
     }
-    public static void readFileAcessoSim(){
 
+    public static ListaDeAcesso readFileAcessoSim(String file, ListaDeAcesso a, ListaDeUsuarios u, ListaDeEntretenimento e){
+        System.out.println("Abrindo Arquivo...");
+        File arquivo = new File(file);
+        try(BufferedReader buffRead = new BufferedReader(new FileReader(arquivo))){
+            System.out.println("Arquivo Aberto!");
+            while(buffRead.ready()) {
+                System.out.println("Lendo Linha...");
+                String line = buffRead.readLine();
+
+                ArrayList<String> valores = new ArrayList<>();
+                Collections.addAll(valores, line.split(";"));
+
+                String dataHoraMinuto = valores.get(0) +";"+ valores.get(1);
+                LocalDateTime dataConvertida = LocalDateTime.parse(dataHoraMinuto,DateTimeFormatter.ofPattern("dd/MM/yyyy;HH:mm"));
+
+                String email = valores.get(2);
+                String codigoEntretenimento = valores.get(3);
+                Cliente cliente = (Cliente) u.procuraUsuario(email);
+                Entretenimento entretenimento = e.pesquisaCodigo(codigoEntretenimento);
+
+                Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);
+                a.adicionaAcesso(acesso, true);
+                System.out.println("Acesso importado");
+            }
+
+        } catch (IOException ex){
+            System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
+        }
+        return a;
     }
 
 }
