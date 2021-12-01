@@ -64,6 +64,7 @@ public class Arquivo {
                         String emailEmpresa = valores.get(5);
                         ClienteEmpresarial empresa = (ClienteEmpresarial) u.procuraUsuario(emailEmpresa);
                         ClienteIndividual individualComEmpresa = new ClienteIndividual(nome, email, senha, cpf, empresa);
+                        empresa.adicionaColaborador(individualComEmpresa);
                         u.cadastraCliente(individualComEmpresa, true);
                     }
                 }

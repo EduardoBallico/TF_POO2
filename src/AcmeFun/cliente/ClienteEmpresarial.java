@@ -25,6 +25,10 @@ public class ClienteEmpresarial extends Cliente{
         return nomeFantasia;
     }
 
+    public void adicionaColaborador(ClienteIndividual c){
+        colaboradores.add(c);
+    }
+
     @Override
     public String getTipo() {
         return "2";
