@@ -45,7 +45,7 @@ public class CatalogoUsuarios {
     public ArrayList<ClienteIndividual> clientesIndividuais(){
         ArrayList<ClienteIndividual> aux = new ArrayList<>();
         for (Usuario value : usuarios) {
-            if (value.defineTipo()==3 || value.defineTipo()==1) {
+            if (value.getTipo().equals("3") || value.getTipo().equals("1")) {
                 aux.add((ClienteIndividual) value);
             }
         }
@@ -54,7 +54,7 @@ public class CatalogoUsuarios {
      public ArrayList<ClienteIndividual> clientesIndividuaisVinculados(){
          ArrayList<ClienteIndividual> aux = new ArrayList<>();
          for (Usuario value : usuarios) {
-             if (value.defineTipo()==3) {
+             if (value.getTipo().equals("3")) {
                  aux.add((ClienteIndividual) value);
              }
          }
@@ -64,7 +64,7 @@ public class CatalogoUsuarios {
     public ArrayList<ClienteIndividual> clientesIndividuaisNaoVinculados(){
         ArrayList<ClienteIndividual> aux = new ArrayList<>();
         for (Usuario value : usuarios) {
-            if (value.defineTipo()==1) {
+            if (value.getTipo().equals("1")) {
                 aux.add((ClienteIndividual) value);
             }
         }
@@ -74,7 +74,7 @@ public class CatalogoUsuarios {
      public ArrayList<ClienteEmpresarial> clientesEmpresariais(){
          ArrayList<ClienteEmpresarial> aux = new ArrayList<>();
          for (Usuario value : usuarios) {
-             if (value.defineTipo()==2) {
+             if (value.getTipo().equals("2")) {
                  aux.add((ClienteEmpresarial) value);
              }
          }
@@ -82,13 +82,16 @@ public class CatalogoUsuarios {
      }
 
     public String toString() {
-        String aux = "";
+
+        StringBuilder aux = new StringBuilder();
+
         for (Usuario value : usuarios) {
-            aux+= "Cadastrado Cliente: " + value.toString() + "\n";
+            aux.append("Cadastrado Cliente: ").append(value.toString()).append("\n");
         }
-        if(!aux.equals("")){
-            return aux;
-        } else{
+        if(!aux.toString().equals("")){
+            return aux.toString();
+        }
+        else {
             return null;
         }
     }

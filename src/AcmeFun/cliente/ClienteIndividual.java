@@ -20,7 +20,15 @@ public class ClienteIndividual extends Cliente{
     public ClienteEmpresarial getEmpresa() {
         return empresa;
     }
-    
+
+    @Override
+    public String getTipo() {
+        if(this.empresa!=null){
+            return "3";
+        }
+        return "1";
+    }
+
     @Override
     public double cobrancaMensal(int ano, int mes){
         double valorInicial = super.cobrancaMensal(ano, mes);
@@ -32,26 +40,20 @@ public class ClienteIndividual extends Cliente{
 
     @Override
     public String toString() {
-        if(getTipo() == 1){
+        if(getTipo().equals("1")){
             return getTipo() +
                 ";" + getNome() + ";" +
                 getEmail() + ";" +
                 getSenha() + ";" +
                 getCpf();
-        }else{
+        }
+        else {
             return getTipo() +
                     ";" + getNome() + ";" +
                     getEmail() + ";" +
                     getSenha() + ";" +
                     getCpf() +  ";" +
-                    getEmpresa().getEmail();
+                    getEmpresa().getEmail() + "\n";
         }
-    }
-    @Override
-    public int defineTipo(){
-        if(this.empresa!=null){
-            return 3;
-        }
-        return 1;
     }
 }

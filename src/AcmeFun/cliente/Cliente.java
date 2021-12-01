@@ -6,13 +6,11 @@ import java.util.ArrayList;
 
 public abstract class Cliente extends Usuario {
     private String nome;
-    private int tipo;
     private ArrayList<Acesso> acessos;
     
     public Cliente(String email, String senha, String nome) {
         super(email, senha);
         this.nome = nome;
-        this.tipo = defineTipo();
         this.acessos = new ArrayList<>();
     }
     
@@ -20,11 +18,8 @@ public abstract class Cliente extends Usuario {
         return nome;
     }
     
-    public int getTipo() {
-        return tipo;
-    }
+    public abstract String getTipo();
 
-    //todo
     public ArrayList<Acesso> getAcessosDoMes(int ano, int mes){
         ArrayList<Acesso> resultado = new ArrayList<>();
         for (Acesso acesso : acessos) {

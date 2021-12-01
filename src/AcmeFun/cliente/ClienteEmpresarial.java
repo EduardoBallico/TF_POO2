@@ -26,6 +26,11 @@ public class ClienteEmpresarial extends Cliente{
     }
 
     @Override
+    public String getTipo() {
+        return "2";
+    }
+
+    @Override
     public double cobrancaMensal(int ano, int mes){
         double valorEmpresa = super.cobrancaMensal(ano, mes);
         for (ClienteIndividual colaborador : colaboradores) {
@@ -36,16 +41,12 @@ public class ClienteEmpresarial extends Cliente{
 
     @Override
     public String toString() {
-        return  "2" +
-                ";" + getNome() + ";" +
+        return  getTipo() + ";" +
+                getNome() + ";" +
                 getEmail() + ";" +
                 getSenha() + ";" +
                 getCnpj() +  ";" +
-                getNomeFantasia();
+                getNomeFantasia() + "\n";
     }
 
-    @Override
-    public int defineTipo(){
-        return 2;
-    }
 }

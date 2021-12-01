@@ -21,11 +21,7 @@ public abstract class Usuario {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public abstract int defineTipo();
+    public abstract String getTipo();
 
     @Override
     public String toString(){
