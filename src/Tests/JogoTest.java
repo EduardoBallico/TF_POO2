@@ -36,4 +36,9 @@ class JogoTest {
     void getTipo() {
         assertEquals(jogo.getTipo(),"2");
     }
+
+    @Test
+    void getPreco() {
+        assertEquals(jogo.getPreco(),8);
+    }
 }
