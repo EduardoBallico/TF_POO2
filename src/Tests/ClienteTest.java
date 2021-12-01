@@ -1,5 +1,6 @@
 package Tests;
 
+import AcmeFun.cliente.Cliente;
 import AcmeFun.cliente.ClienteEmpresarial;
 import AcmeFun.cliente.ClienteIndividual;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,11 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ClienteEmpresarialTest {
+class ClienteTest {
 
     ClienteEmpresarial cE;
     ClienteIndividual cN;
     ClienteIndividual cV;
+    Cliente c;
 
     @BeforeEach
     public void start(){
@@ -21,39 +23,17 @@ class ClienteEmpresarialTest {
     }
 
     @Test
-    void getCnpj() {
-        assertEquals(cE.getCnpj(),"12123123123333");
+    void getNome() {
+        assertEquals(cN.getNome(),"mts");
     }
-
     //todo
     @Test
-    void getColaboradores() {
-    }
+    void getAcessosDoMes() {
 
-    @Test
-    void adicionaColaborador() {
-        cE.adicionaColaborador(cV);
-        assertEquals(cE.getColaboradores().get(0), cV);
     }
-
-    @Test
-    void getNomeFantasia() {
-        assertEquals(cE.getNomeFantasia(),"Focco Solucoes");
-    }
-
     //todo
     @Test
     void cobrancaMensal() {
-        //assertEquals();
-    }
 
-    @Test
-    void testToString() {
-        //assertEquals();
-    }
-
-    @Test
-    void getTipo() {
-        assertEquals(cE.getTipo(), "2");
     }
 }
