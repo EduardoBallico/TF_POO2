@@ -1,4 +1,4 @@
-package Tests;
+package Tests.EntretenimentoTests;
 
 import AcmeFun.entretenimento.Filme;
 import AcmeFun.entretenimento.ListaDeEntretenimento;

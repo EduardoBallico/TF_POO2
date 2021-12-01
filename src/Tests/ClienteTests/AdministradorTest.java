@@ -1,4 +1,4 @@
-package Tests;
+package Tests.ClienteTests;
 
 import AcmeFun.cliente.Administrador;
 import AcmeFun.cliente.ClienteIndividual;

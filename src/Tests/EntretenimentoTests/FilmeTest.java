@@ -1,4 +1,4 @@
-package Tests;
+package Tests.EntretenimentoTests;
 
 import AcmeFun.cliente.ClienteEmpresarial;
 import AcmeFun.entretenimento.Filme;
