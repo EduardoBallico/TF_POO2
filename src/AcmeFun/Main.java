@@ -1,7 +1,7 @@
 package AcmeFun;
 
 import AcmeFun.acesso.Acesso;
-import AcmeFun.acesso.CatalogoAcesso;
+import AcmeFun.acesso.ListaDeAcesso;
 import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
 
@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    public CatalogoUsuarios catalogoUsuarios;
-    public CatalogoEntretenimento catalogoEntretenimento;
-    public CatalogoAcesso catalogoAcesso;
+    public ListaDeUsuarios listaDeUsuarios;
+    public ListaDeEntretenimento listaDeEntretenimento;
+    public ListaDeAcesso listaDeAcesso;
 
     public Usuario usuarioAtivo;
 
@@ -28,13 +28,13 @@ public class Main {
     }
 
     public void iniciar(){
-        catalogoUsuarios = new CatalogoUsuarios();
-        catalogoEntretenimento = new CatalogoEntretenimento();
-        catalogoAcesso = new CatalogoAcesso();
+        listaDeUsuarios = new ListaDeUsuarios();
+        listaDeEntretenimento = new ListaDeEntretenimento();
+        listaDeAcesso = new ListaDeAcesso();
 
         Administrador adm = new Administrador("administracao@mail.com","admin123");
 
-        catalogoUsuarios.cadastraCliente(adm, false);
+        listaDeUsuarios.cadastraCliente(adm, false);
 
         Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());
         Arquivo.readFileCliente(Arquivo.getArquivoClientes());
@@ -42,7 +42,7 @@ public class Main {
     }
 
     public Usuario fazLogin(String email, String senha){
-        Usuario u = catalogoUsuarios.procuraUsuario(email);
+        Usuario u = listaDeUsuarios.procuraUsuario(email);
         if(u.getSenha().equals(senha)){
             return u;
         }
@@ -106,7 +106,7 @@ public class Main {
                                 String cpf = in.nextLine();
 
                                 cli = new ClienteIndividual(nome, email, senha, cpf, null);
-                                catalogoUsuarios.cadastraCliente(cli, false);
+                                listaDeUsuarios.cadastraCliente(cli, false);
                                 flag = false;
                             }
                             case "2" ->{
@@ -115,9 +115,9 @@ public class Main {
                                 System.out.println("Informe o e-mail da empresa em que o usuário está vinculado: ");
                                 String empresa = in.nextLine();
 
-                                ClienteEmpresarial cliEmp = (ClienteEmpresarial) catalogoUsuarios.procuraUsuario(empresa);
+                                ClienteEmpresarial cliEmp = (ClienteEmpresarial) listaDeUsuarios.procuraUsuario(empresa);
                                 cli = new ClienteIndividual(nome, email, senha, cpf, cliEmp);
-                                catalogoUsuarios.cadastraCliente(cli, false);
+                                listaDeUsuarios.cadastraCliente(cli, false);
                                 flag = false;
                             }
                             case "3" -> {
@@ -127,7 +127,7 @@ public class Main {
                                 String nomeFantasia = in.nextLine();
 
                                 cli = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
-                                catalogoUsuarios.cadastraCliente(cli, false);
+                                listaDeUsuarios.cadastraCliente(cli, false);
                                 flag = false;
                             }
                             default ->
@@ -157,7 +157,7 @@ public class Main {
                                 int duracao = Integer.parseInt(in.nextLine());
 
                                 ent = new Filme(codigo, titulo, anoLanc, duracao);
-                                catalogoEntretenimento.addEntretenimento(ent, false);
+                                listaDeEntretenimento.addEntretenimento(ent, false);
                                 flag = false;
                             }
                             case "2" ->{
@@ -167,7 +167,7 @@ public class Main {
                                 String genero = in.nextLine();
 
                                 ent = new Jogo(codigo, titulo, anoLanc, tituloOriginal, genero);
-                                catalogoEntretenimento.addEntretenimento(ent, false);
+                                listaDeEntretenimento.addEntretenimento(ent, false);
                                 flag = false;
                             }
                             case "3" -> {
@@ -175,7 +175,7 @@ public class Main {
                                 int anoConc = Integer.parseInt(in.nextLine());
 
                                 ent = new Serie(codigo,titulo,anoLanc,anoConc);
-                                catalogoEntretenimento.addEntretenimento(ent, false);
+                                listaDeEntretenimento.addEntretenimento(ent, false);
                                 flag = false;
                             }
                             case "4" -> {
@@ -186,9 +186,9 @@ public class Main {
                                 System.out.println("Informe o código da série em que este episódio pertence: ");
                                 String codSerie = in.nextLine();
 
-                                Serie serie = (Serie) catalogoEntretenimento.pesquisaCodigo(codSerie);
+                                Serie serie = (Serie) listaDeEntretenimento.pesquisaCodigo(codSerie);
                                 EpisodioSerie episodio = new EpisodioSerie(codigo, titulo, anoLanc, numTemporada, numEpisodio, serie);
-                                catalogoEntretenimento.addEntretenimento(episodio, false);
+                                listaDeEntretenimento.addEntretenimento(episodio, false);
                                 serie.linkaEp(episodio);
                                 flag = false;
                             }
@@ -234,18 +234,18 @@ public class Main {
                     String pesquisa = in.nextLine();
 
                     switch (tipo){
-                        case "1" -> catalogoEntretenimento.pesquisaCodigo(pesquisa);
-                        case "2" -> catalogoEntretenimento.pesquisaTitulo(pesquisa);
-                        case "3" -> catalogoEntretenimento.pesquisaAnoLanc(Integer.parseInt(pesquisa));
+                        case "1" -> listaDeEntretenimento.pesquisaCodigo(pesquisa);
+                        case "2" -> listaDeEntretenimento.pesquisaTitulo(pesquisa);
+                        case "3" -> listaDeEntretenimento.pesquisaAnoLanc(Integer.parseInt(pesquisa));
                         default -> System.out.println("Tipo informado incorreto!");
                     }
                     switch (ordem){
-                        case "1" -> catalogoEntretenimento.ordenaTitulo();
-                        case "2" -> catalogoEntretenimento.ordenaAno();
+                        case "1" -> listaDeEntretenimento.ordenaTitulo();
+                        case "2" -> listaDeEntretenimento.ordenaAno();
                         default -> System.out.println("Ordenação informada incorreta!");
                     }
                     try{
-                        for(Entretenimento e : catalogoEntretenimento.getUltimaConsulta()){
+                        for(Entretenimento e : listaDeEntretenimento.getUltimaConsulta()){
                             System.out.println(e.getCodigo() + ", " + e.getTitulo());
                         }
                     }
@@ -255,11 +255,11 @@ public class Main {
                 }
                 case "2" -> {
                     System.out.println("Selecione o codigo de um dos Entretenimentos da ultima consulta:");
-                    for (Entretenimento e : catalogoEntretenimento.getUltimaConsulta()) {
+                    for (Entretenimento e : listaDeEntretenimento.getUltimaConsulta()) {
                         System.out.println(e);
                     }
 
-                    Entretenimento e = catalogoEntretenimento.pesquisaCodigo(in.nextLine());
+                    Entretenimento e = listaDeEntretenimento.pesquisaCodigo(in.nextLine());
 
                     if(e == null) {
                         System.out.println("Entretenimento não encontrado");
@@ -275,7 +275,7 @@ public class Main {
                         switch(in.nextLine()){
                             case "1" ->{
                                 Acesso a = new Acesso((Cliente) usuarioAtivo, e);
-                                catalogoAcesso.adicionaAcesso(a, false);
+                                listaDeAcesso.adicionaAcesso(a, false);
                                 System.out.println("Acesso cadastrado!");
                                 flag = true;
                             }
@@ -295,7 +295,7 @@ public class Main {
 
                     System.out.println(
                             "Sua cobrança mensal é" +
-                            catalogoAcesso.getCobrancaCliente(
+                            listaDeAcesso.getCobrancaCliente(
                                     Integer.parseInt(ano), Integer.parseInt(mes), (Cliente) usuarioAtivo)
                     );
                 }

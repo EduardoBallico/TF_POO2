@@ -1,8 +1,8 @@
 package AcmeFun;
 
 import AcmeFun.acesso.Acesso;
-import AcmeFun.acesso.CatalogoAcesso;
-import AcmeFun.cliente.CatalogoUsuarios;
+import AcmeFun.acesso.ListaDeAcesso;
+import AcmeFun.cliente.ListaDeUsuarios;
 import AcmeFun.cliente.Cliente;
 import AcmeFun.cliente.ClienteEmpresarial;
 import AcmeFun.cliente.ClienteIndividual;
@@ -26,7 +26,7 @@ public class Arquivo {
     // Fechou
     public static void readFileCliente(File strFile){
 
-        CatalogoUsuarios u = new CatalogoUsuarios();
+        ListaDeUsuarios u = new ListaDeUsuarios();
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
             while(buffRead.ready()) {
@@ -77,7 +77,7 @@ public class Arquivo {
     // Fechou
     public static void readFileEntretenimento(File strFile){
 
-        CatalogoEntretenimento e = new CatalogoEntretenimento();
+        ListaDeEntretenimento e = new ListaDeEntretenimento();
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
             while(buffRead.ready()) {
@@ -137,9 +137,9 @@ public class Arquivo {
     // Feshow
     public static void readFileAcessos(File strFile){
 
-        CatalogoEntretenimento e = new CatalogoEntretenimento();
-        CatalogoUsuarios u = new CatalogoUsuarios();
-        CatalogoAcesso a = new CatalogoAcesso();
+        ListaDeEntretenimento e = new ListaDeEntretenimento();
+        ListaDeUsuarios u = new ListaDeUsuarios();
+        ListaDeAcesso a = new ListaDeAcesso();
 
         try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
             while(buffRead.ready()) {

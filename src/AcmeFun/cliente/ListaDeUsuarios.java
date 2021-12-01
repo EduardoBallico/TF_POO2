@@ -5,7 +5,7 @@ import AcmeFun.Arquivo;
 import java.io.File;
 import java.util.ArrayList;
 
-public class CatalogoUsuarios {
+public class ListaDeUsuarios {
 
     private static ArrayList<Usuario> usuarios = new ArrayList<>();
 

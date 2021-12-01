@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CatalogoEntretenimento {
+public class ListaDeEntretenimento {
 
     private final static ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
     private ArrayList<Entretenimento> ultimaConsulta = null;

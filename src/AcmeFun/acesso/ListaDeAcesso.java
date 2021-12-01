@@ -3,10 +3,9 @@ package AcmeFun.acesso;
 import AcmeFun.Arquivo;
 import AcmeFun.cliente.*;
 
-import java.io.File;
 import java.util.ArrayList;
 
-public class CatalogoAcesso {
+public class ListaDeAcesso {
 
     private final static ArrayList<Acesso> acessos = new ArrayList<>();
 
