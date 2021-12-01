@@ -5,6 +5,7 @@ import AcmeFun.acesso.ListaDeAcesso;
 import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -198,8 +199,27 @@ public class Main {
                     }
                 }
                 case "3" -> {
-                    // Consultar acessos mensais
-                }
+                    System.out.println("Informe o ano (número) que deseja consultar: ");
+                    int ano = Integer.parseInt(in.nextLine());
+                    System.out.println("Informe o mês (número) que deseja consultar: ");
+                    int mes = Integer.parseInt(in.nextLine());
+
+                    for (Acesso ac: listaDeAcesso.getAcessosMes(ano,mes)) {
+                        String email = ac.getCliente().getEmail();
+                        LocalDateTime dateTime = ac.getDataHora();
+                        String cod = ac.getEntretenimento().getCodigo();
+                        String titulo = ac.getEntretenimento().getTitulo();
+
+                        double res = listaDeAcesso.getCobrancaCliente(ano,mes,ac.getCliente());
+
+                        System.out.println("E-mail do cliente: "+email+" Horário do acesso: "+dateTime+
+                                "Código do Serviço acessado: "+cod+" Título do serviço: "+titulo+
+                                "Valor total do cliente: "+res);
+                    }
+                    double d = listaDeAcesso.getCobrancaTotal(ano,mes);
+                    System.out.println("Valor total de todos os acessos: "+ d);
+                 }
+
                 case "4"-> {
                     // Simular carga de dados
                 }
