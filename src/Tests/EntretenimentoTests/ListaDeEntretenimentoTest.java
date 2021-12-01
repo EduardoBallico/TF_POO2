@@ -1,9 +1,12 @@
 package Tests.EntretenimentoTests;
 
+import AcmeFun.entretenimento.Entretenimento;
 import AcmeFun.entretenimento.Filme;
 import AcmeFun.entretenimento.ListaDeEntretenimento;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,22 +42,28 @@ class ListaDeEntretenimentoTest {
     //todo
     @Test
     void pesquisaTitulo() {
+        ArrayList<Entretenimento> ent = new ArrayList<>();
+        ent.add(f);
         lE.addEntretenimento(f,false);
-        assertEquals(lE.pesquisaTitulo("focco"), lE.getEntretenimentos().get(0));
+        assertEquals(lE.pesquisaTitulo("focco"), ent.get(0));
     }
 
     //todo
     @Test
     void pesquisaAnoLanc() {
+        ArrayList<Entretenimento> ent = new ArrayList<>();
+        ent.add(f);
         lE.addEntretenimento(f,false);
-        assertEquals(lE.pesquisaAnoLanc(2000), lE.getEntretenimentos().get(0));
+        assertEquals(lE.pesquisaAnoLanc(2000), ent.get(0));
     }
 
     //todo
     @Test
     void pesquisaCodigo() {
+        ArrayList<Entretenimento> ent = new ArrayList<>();
+        ent.add(f);
         lE.addEntretenimento(f,false);
-        assertEquals(lE.pesquisaCodigo("F01"), lE.getEntretenimentos().get(0));
+        assertEquals(lE.pesquisaCodigo("F01"), ent.get(0));
     }
 
     //todo
