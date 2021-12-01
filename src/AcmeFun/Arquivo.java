@@ -23,8 +23,7 @@ public class Arquivo {
     private static File arquivoAcessos = new File(
             "src/data/TESTE-acessos.dat");
 
-    // Fechou
-    public static void readFileCliente(File strFile){
+    public static void readFileCliente(File strFile, boolean simulaCarga){
 
         ListaDeUsuarios u = new ListaDeUsuarios();
 
@@ -37,26 +36,33 @@ public class Arquivo {
 
                 switch (valores.get(0)) {
                     case "1" -> {
-                        System.out.println("Cliente 1");
                         String nome = valores.get(1);
                         String email = valores.get(2);
                         String senha = valores.get(3);
                         String cpf = valores.get(4);
                         ClienteIndividual individualSemEmpresa = new ClienteIndividual(nome, email, senha, cpf, null);
-                        u.cadastraCliente(individualSemEmpresa, true);
+                        if (simulaCarga){
+                            System.out.println("isso é o q printa qnd simula");
+                        }
+                        else {
+                            u.cadastraCliente(individualSemEmpresa, true);
+                        }
                     }
                     case "2" -> {
-                        System.out.println("Cliente 2");
                         String nome = valores.get(1);
                         String email = valores.get(2);
                         String senha = valores.get(3);
                         String cnpj = valores.get(4);
                         String nomeFantasia = valores.get(5);
                         ClienteEmpresarial empresarial = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
-                        u.cadastraCliente(empresarial, true);
+                        if (simulaCarga){
+                            System.out.println("isso é o q printa qnd simula");
+                        }
+                        else {
+                            u.cadastraCliente(empresarial, true);
+                        }
                     }
                     case "3" -> {
-                        System.out.println("Cliente 3");
                         String nome = valores.get(1);
                         String email = valores.get(2);
                         String senha = valores.get(3);
@@ -65,7 +71,12 @@ public class Arquivo {
                         ClienteEmpresarial empresa = (ClienteEmpresarial) u.procuraUsuario(emailEmpresa);
                         ClienteIndividual individualComEmpresa = new ClienteIndividual(nome, email, senha, cpf, empresa);
                         empresa.adicionaColaborador(individualComEmpresa);
-                        u.cadastraCliente(individualComEmpresa, true);
+                        if (simulaCarga){
+                            System.out.println("isso é o q printa qnd simula");
+                        }
+                        else {
+                            u.cadastraCliente(individualComEmpresa, true);
+                        }
                     }
                 }
             }
@@ -74,7 +85,6 @@ public class Arquivo {
         }
     }
 
-    // Fechou
     public static void readFileEntretenimento(File strFile){
 
         ListaDeEntretenimento e = new ListaDeEntretenimento();
@@ -88,7 +98,6 @@ public class Arquivo {
 
                 switch (valores.get(0)) {
                     case "1" -> {
-                        System.out.println("Filme");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
@@ -97,7 +106,6 @@ public class Arquivo {
                         e.addEntretenimento(filme, true);
                     }
                     case "2" -> {
-                        System.out.println("Jogo");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
@@ -107,7 +115,6 @@ public class Arquivo {
                         e.addEntretenimento(jogo, true);
                     }
                     case "3" -> {
-                        System.out.println("Serie");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
@@ -116,7 +123,6 @@ public class Arquivo {
                         e.addEntretenimento(serie, true);
                     }
                     case "4" -> {
-                        System.out.println("Episódio");
                         String codigo = valores.get(1);
                         String titulo = valores.get(2);
                         int anoLancamento = Integer.parseInt(valores.get(3));
@@ -134,7 +140,6 @@ public class Arquivo {
         }
     }
 
-    // Feshow
     public static void readFileAcessos(File strFile){
 
         ListaDeEntretenimento e = new ListaDeEntretenimento();
@@ -187,28 +192,4 @@ public class Arquivo {
         return arquivoAcessos;
     }
 
-    /*
-    public String readFileRelatorio(File strFile){
-
-        String aux = "";
-
-        try(BufferedReader buffRead = new BufferedReader((new FileReader(strFile)))){
-            System.out.println("Chegou aqui em cima");
-            while(buffRead.ready()) {
-                String line = buffRead.readLine();
-                aux += line + "\n";
-            }
-
-        } catch (IOException e){
-            System.out.println("Arquivo não encontrado. Tente novamente");
-            return null;
-        }
-
-        if (aux.equals("")){
-            return null;
-        } else{
-            return aux;
-        }
-    }
-    */
 }

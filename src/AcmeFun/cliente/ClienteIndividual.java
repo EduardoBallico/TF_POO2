@@ -8,9 +8,6 @@ public class ClienteIndividual extends Cliente{
         super(email,senha,nome);
         this.cpf = cpf;
         this.empresa = empresa;
-        // tive que chamar o defineTipo aqui pois ele tava pegando 1 por chamar no super antes de atribuir a empresa
-        //todo
-        //this.tipo = defineTipo();
     }
 
     public String getCpf() {

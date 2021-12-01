@@ -38,16 +38,22 @@ public class Main {
         listaDeUsuarios.cadastraCliente(adm, false);
 
         Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());
-        Arquivo.readFileCliente(Arquivo.getArquivoClientes());
+        Arquivo.readFileCliente(Arquivo.getArquivoClientes(), false);
         Arquivo.readFileAcessos(Arquivo.getArquivoAcessos());
     }
 
     public Usuario fazLogin(String email, String senha){
-        Usuario u = listaDeUsuarios.procuraUsuario(email);
-        if(u.getSenha().equals(senha)){
-            return u;
+        try {
+            Usuario u = listaDeUsuarios.procuraUsuario(email);
+            if(u.getSenha().equals(senha)){
+                return u;
+            }
+            return null;
         }
-        return null;
+        catch (NullPointerException e){
+            System.out.println("Usuario não encontrado");
+            return null;
+        }
     }
 
     public void executaLogin(){
@@ -221,7 +227,7 @@ public class Main {
                  }
 
                 case "4"-> {
-                    // Simular carga de dados
+
                 }
                 case "0" -> {
                     System.out.println("Sistema finalizado. Obrigado por utilizar nosso programa.");
@@ -265,6 +271,7 @@ public class Main {
                         default -> System.out.println("Ordenação informada incorreta!");
                     }
                     try{
+                        System.out.println(listaDeEntretenimento.getUltimaConsulta());
                         for(Entretenimento e : listaDeEntretenimento.getUltimaConsulta()){
                             System.out.println(e.getCodigo() + ", " + e.getTitulo());
                         }
