@@ -30,14 +30,19 @@ class ClienteIndividualTest {
         assertEquals(cV.getEmpresa(), cE);
     }
 
-    //todo
     @Test
     void cobrancaMensal() {
+        assertEquals(cV.cobrancaMensal(2021, 11),0.0);
     }
 
     @Test
     void testToString() {
         assertEquals("1;mts;mts@email.com;mts;12312312311", cN.toString());
+    }
+
+    @Test
+    void testToStringPt2() {
+        assertEquals("3;mts;mts@email.com;mts;12312312311;focco@f.com\n", cV.toString());
     }
 
     @Test
