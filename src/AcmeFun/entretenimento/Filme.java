@@ -19,12 +19,12 @@ public class Filme extends Entretenimento{
                 ";" + getCodigo() + ";" +
                 getTitulo() + ";" +
                 getAnoLancamento() + ";" +
-                getTempoDurcao();
+                getTempoDurcao() + "\n";
     }
 
     @Override
-    public int defineTipo(){
-        return 1;
+    public String getTipo(){
+        return "1";
     }
 }
 

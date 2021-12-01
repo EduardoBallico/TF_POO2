@@ -34,15 +34,13 @@ public class CatalogoUsuarios {
     public boolean cadastraCliente(Usuario usuario, boolean isLoadingFromFile){
         if(!verificaUsuario(usuario)){
             usuarios.add(usuario);
-
             if(!isLoadingFromFile){
                 Arquivo.writeFile(Arquivo.getArquivoClientes(),usuario.toString() + "\n");
             }
-
             return true;
         }
-            return false;
-        }
+        return false;
+    }
 
     public ArrayList<ClienteIndividual> clientesIndividuais(){
         ArrayList<ClienteIndividual> aux = new ArrayList<>();
