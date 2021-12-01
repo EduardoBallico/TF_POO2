@@ -27,16 +27,16 @@ public class Serie extends Entretenimento{
 
     @Override
     public String toString() {
-        return getTipo() +
+        return this.getTipo() +
                 ";" + getCodigo() + ";" +
                 getTitulo() + ";" +
                 getAnoLancamento() + ";" +
-                getAnoConclusao();
+                getAnoConclusao() + "\n";
     }
 
     @Override
-    public int defineTipo(){
-        return 3;
+    public String getTipo(){
+        return "3";
     }
 }
 

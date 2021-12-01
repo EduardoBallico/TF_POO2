@@ -5,7 +5,6 @@ import AcmeFun.acesso.CatalogoAcesso;
 import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -103,7 +102,6 @@ public class Main {
                     while (flag) {
                         switch (tipo){
                             case "1" ->{
-
                                 System.out.println("Informe o CPF do usuário que deseja registrar: ");
                                 String cpf = in.nextLine();
 
@@ -296,8 +294,7 @@ public class Main {
                     System.out.println("Sistema Finalizado");
                     return;
                 }
-                default ->
-                        System.out.println("Opção invalida!");
+                default -> System.out.println("Opção invalida!");
             }
         }
     }

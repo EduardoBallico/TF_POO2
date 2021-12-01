@@ -1,6 +1,6 @@
 package AcmeFun.cliente;
 
-public class Usuario {
+public abstract class Usuario {
     private String email;
     private String senha;
 
@@ -25,9 +25,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int defineTipo(){
-        return 0;
-    }
+    public abstract int defineTipo();
 
     @Override
     public String toString(){

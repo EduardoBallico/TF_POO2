@@ -23,11 +23,11 @@ public class Jogo extends Entretenimento{
                 getTitulo() + ";" +
                 getAnoLancamento() + ";" +
                 getTituloOriginal() + ";" +
-                getGenero();
+                getGenero() + "\n";
     }
 
     @Override
-    public int defineTipo(){
-        return 2;
+    public String getTipo(){
+        return "2";
     }
 }
