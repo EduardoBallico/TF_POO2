@@ -40,4 +40,9 @@ public class EpisodioSerie extends Entretenimento{
     public String getTipo(){
         return "4";
     }
+
+    @Override
+    public int getPreco() {
+        return 4;
+    }
 }

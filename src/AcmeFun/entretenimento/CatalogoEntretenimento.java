@@ -127,21 +127,16 @@ public class CatalogoEntretenimento {
         return ultimaConsulta;
     }
 
-    //todo
-    public String relatorioFinalEntretenimento(){
-        String s = "";
+    public String toString(){
+        StringBuilder s = new StringBuilder();
         for (Entretenimento value : entretenimentos) {
-                s+= "Cadastrado Entretenimento: " + value.toString() + "\n";
-            }
-        if(!s.equals("")){
-            return s;
-        } else{
+            s.append("Cadastrado Entretenimento: ").append(value.toString()).append("\n");
+        }
+        if(!s.toString().equals("")){
+            return s.toString();
+        }
+        else{
             return null;
         }
-
-
     }
-
 }
-
-

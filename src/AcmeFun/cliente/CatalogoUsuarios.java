@@ -82,9 +82,7 @@ public class CatalogoUsuarios {
      }
 
     public String toString() {
-
         StringBuilder aux = new StringBuilder();
-
         for (Usuario value : usuarios) {
             aux.append("Cadastrado Cliente: ").append(value.toString()).append("\n");
         }

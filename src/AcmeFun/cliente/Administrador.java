@@ -10,5 +10,10 @@ public class Administrador extends Usuario{
         return null;
     }
 
+    @Override
+    public String toString() {
+        return null;
+    }
+
 }
 

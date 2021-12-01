@@ -26,5 +26,10 @@ public class Filme extends Entretenimento{
     public String getTipo(){
         return "1";
     }
+
+    @Override
+    public int getPreco() {
+        return 6;
+    }
 }
 

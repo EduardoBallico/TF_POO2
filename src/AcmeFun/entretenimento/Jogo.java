@@ -30,4 +30,9 @@ public class Jogo extends Entretenimento{
     public String getTipo(){
         return "2";
     }
+
+    @Override
+    public int getPreco() {
+        return 8;
+    }
 }

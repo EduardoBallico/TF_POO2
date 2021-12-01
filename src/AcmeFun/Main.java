@@ -288,7 +288,16 @@ public class Main {
                     } while(!flag);
                 }
                 case "3" -> {
+                    System.out.println("Informe o ano desejado para a consulta: ");
+                    String ano = in.nextLine();
+                    System.out.println("Informe o mês desejado para a consulta: ");
+                    String mes = in.nextLine();
 
+                    System.out.println(
+                            "Sua cobrança mensal é" +
+                            catalogoAcesso.getCobrancaCliente(
+                                    Integer.parseInt(ano), Integer.parseInt(mes), (Cliente) usuarioAtivo)
+                    );
                 }
                 case "0" -> {
                     System.out.println("Sistema Finalizado");

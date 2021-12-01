@@ -20,75 +20,75 @@ public class CatalogoAcesso {
         return true;
     }
 
-    //todo
-    public ArrayList<Acesso> getAcessosDaqueleMesGeral(int ano, int mes){
-        ArrayList<Acesso> resultadoGeral = new ArrayList<>();
-        for (Acesso acesso : acessos) {
-            if(acesso.getDataHora().getYear() == ano && acesso.getDataHora().getMonth().getValue() == mes){
-                resultadoGeral.add(acesso);
+    public ArrayList<Acesso> getAcessosMes(int ano, int mes){
+
+        ArrayList<Acesso> resultados = new ArrayList<>();
+        for (Acesso a : acessos){
+            if(a.getDataHora().getYear() == ano && a.getDataHora().getMonth().getValue() == mes){
+                resultados.add(a);
             }
         }
-
-        if(resultadoGeral.size()==0){
+        if(resultados.isEmpty()){
             return null;
-        }else{
-            return resultadoGeral;
+        }
+        else {
+            return resultados;
         }
     }
+    
+    public ArrayList<Acesso> getAcessosMesCliente(int ano, int mes, Cliente cliente){
 
-    //todo
-    public ArrayList<Acesso> getAcessosDaqueleMesCliente(ArrayList<Acesso> resultadoGeral, Cliente cliente){
-        ArrayList<Acesso> resultadoCliente = new ArrayList<>();
-        if(resultadoGeral!=null && cliente!=null){
-            for (Acesso acesso : resultadoGeral) {
-                if(acesso.getCliente().equals(cliente)){
-                    resultadoCliente.add(acesso);
-                }
+        ArrayList<Acesso> resultados = new ArrayList<>();
+        for(Acesso a : getAcessosMes(ano, mes)){
+            if(a.getCliente().getEmail().equals(cliente.getEmail())){
+                resultados.add(a);
             }
         }
-
-        if(resultadoCliente.size()==0){
+        if(resultados.size()==0){
             return null;
-        }else{
-            return resultadoCliente;
+        }
+        else{
+            return resultados;
         }
     }
 
-    public String getRelatório(ArrayList<Acesso> acessos){
-        String relatorio = "";
-        for (Acesso acesso : acessos) {
-            relatorio += acesso.toString() + "\n";
-        }
-        return relatorio;
+    public double getCobrancaTotal(int ano, int mes){
 
-    }
-
-    //todo
-    public double cobrancaMensalGeral(int ano, int mes){
         double valorFinal = 0;
-        for (Acesso acesso : getAcessosDaqueleMesGeral(ano, mes)) {
-            valorFinal = valorFinal + acesso.getCobranca();
+        for (Acesso a : getAcessosMes(ano, mes)){
+            valorFinal += a.getEntretenimento().getPreco();
+        }
+
+        return valorFinal;
+    }
+
+    public double getCobrancaCliente(int ano, int mes, Cliente cliente){
+
+        double valorFinal = 0;
+        double valorColaboradores = 0;
+
+        for (Acesso a : getAcessosMesCliente(ano, mes, cliente)){
+            valorFinal += a.getEntretenimento().getPreco();
+        }
+
+        if (cliente.getTipo().equals("3")) return valorFinal/2;
+        if (cliente.getTipo().equals("2")){
+            ClienteEmpresarial ce = (ClienteEmpresarial) cliente;
+            for(ClienteIndividual c : ce.getColaboradores()){
+                valorColaboradores += getCobrancaCliente(ano, mes, c);
+            }
+            return valorFinal + valorColaboradores;
         }
         return valorFinal;
     }
 
-    //todo
-    public double cobrancaMensalCliente(int ano, int mes, ArrayList<Acesso> acessosCliente, Cliente cliente){
-        double valorFinal = 0;
-        for (Acesso acesso : getAcessosDaqueleMesCliente(acessosCliente,cliente)) {
-            valorFinal = valorFinal + acesso.getCobranca();
-        }
-        return valorFinal;
-    }
-
-    //todo
-    public String relatorioFinalAcessos(File file){
-        String aux = "";
+    public String toString(){
+        StringBuilder aux = new StringBuilder();
         for (Acesso value : acessos) {
-            aux+= "Cadastrado Acesso: " + value.toString() + "\n";
+            aux.append("Cadastrado Acesso: ").append(value.toString()).append("\n");
         }
-        if(!aux.equals("")){
-            return aux;
+        if(!aux.toString().equals("")){
+            return aux.toString();
         } else{
             return null;
         }

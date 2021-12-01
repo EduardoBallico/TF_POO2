@@ -17,7 +17,6 @@ public abstract class Cliente extends Usuario {
     public String getNome() {
         return nome;
     }
-    
     public abstract String getTipo();
 
     public ArrayList<Acesso> getAcessosDoMes(int ano, int mes){
@@ -42,7 +41,5 @@ public abstract class Cliente extends Usuario {
     }
 
     @Override
-    public String toString(){
-        return "";
-    }
+    public abstract String toString();
 }

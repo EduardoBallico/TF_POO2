@@ -38,5 +38,10 @@ public class Serie extends Entretenimento{
     public String getTipo(){
         return "3";
     }
+
+    @Override
+    public int getPreco() {
+        return 4 * episodios.size();
+    }
 }
 
