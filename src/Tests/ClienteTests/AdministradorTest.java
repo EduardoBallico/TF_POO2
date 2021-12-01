@@ -1,7 +1,6 @@
 package Tests.ClienteTests;
 
 import AcmeFun.cliente.Administrador;
-import AcmeFun.cliente.ClienteIndividual;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,5 +18,10 @@ class AdministradorTest {
     @Test
     void getTipo() {
         assertNull(adm.getTipo());
+    }
+
+    @Test
+    void testToString(){
+        assertNull(adm.toString());
     }
 }
