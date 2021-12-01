@@ -36,7 +36,7 @@ class SerieTest {
     @Test
     void linkaEp() {
         serie.linkaEp(epSerie);
-        //assertEquals();
+        assertEquals(serie.getEpisodios().get(0), epSerie);
     }
 
     @Test
