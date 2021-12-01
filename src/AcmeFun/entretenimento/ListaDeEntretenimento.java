@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class ListaDeEntretenimento {
 
-    private final static ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
+    private ArrayList<Entretenimento> entretenimentos = new ArrayList<>();
     private ArrayList<Entretenimento> ultimaConsulta = null;
 
     public ArrayList<Entretenimento> getUltimaConsulta() throws NullPointerException {

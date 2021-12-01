@@ -36,7 +36,7 @@ public class Main {
 
         Administrador adm = new Administrador("administracao@mail.com","admin123");
 
-        listaDeUsuarios.cadastraCliente(adm, false);
+        listaDeUsuarios.cadastraCliente(adm, true);
 
         listaDeEntretenimento = Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos(), listaDeEntretenimento);
         listaDeUsuarios = Arquivo.readFileCliente(Arquivo.getArquivoClientes(), listaDeUsuarios);

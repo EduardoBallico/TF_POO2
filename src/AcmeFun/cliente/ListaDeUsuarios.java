@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ListaDeUsuarios {
 
-    private static ArrayList<Usuario> usuarios = new ArrayList<>();
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public boolean exiteUsuario(Usuario usuario){
         for (Usuario usu : usuarios) {

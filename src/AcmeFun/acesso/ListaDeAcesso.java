@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ListaDeAcesso {
 
-    private final static ArrayList<Acesso> acessos = new ArrayList<>();
+    private ArrayList<Acesso> acessos = new ArrayList<>();
 
     public boolean adicionaAcesso(Acesso acesso, boolean isLoadingFromFile){
         acessos.add(acesso);
