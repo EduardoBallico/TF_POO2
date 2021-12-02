@@ -6,7 +6,6 @@ import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -102,12 +101,12 @@ public class Main {
                     System.out.println("Que tipo de usuário deseja cadastrar?");
                     System.out.println("(1) Cliente não vinculado /n (2) Cliente vinculado /n " +
                             "(3) Conta empresarial");
-                    String tipo = in.nextLine();
 
                     Cliente cli = null;
 
                     boolean flag = true;
                     while (flag) {
+                        String tipo = in.nextLine();
                         switch (tipo){
                             case "1" ->{
                                 System.out.println("Informe o CPF do usuário que deseja registrar: ");
@@ -115,6 +114,7 @@ public class Main {
 
                                 cli = new ClienteIndividual(nome, email, senha, cpf, null);
                                 listaDeUsuarios.cadastraCliente(cli, false);
+                                System.out.println("Cliente cadastrado!");
                                 flag = false;
                             }
                             case "2" ->{
@@ -126,6 +126,7 @@ public class Main {
                                 ClienteEmpresarial cliEmp = (ClienteEmpresarial) listaDeUsuarios.procuraUsuario(empresa);
                                 cli = new ClienteIndividual(nome, email, senha, cpf, cliEmp);
                                 listaDeUsuarios.cadastraCliente(cli, false);
+                                System.out.println("Cliente cadastrado!");
                                 flag = false;
                             }
                             case "3" -> {
@@ -136,10 +137,10 @@ public class Main {
 
                                 cli = new ClienteEmpresarial(nome, email, senha, cnpj, nomeFantasia);
                                 listaDeUsuarios.cadastraCliente(cli, false);
+                                System.out.println("Cliente cadastrado!");
                                 flag = false;
                             }
-                            default ->
-                                    System.out.println("Opção invalida!");
+                            default -> System.out.println("Opção invalida!");
                         }
                     }
                 }
@@ -153,12 +154,12 @@ public class Main {
                     System.out.println("Que tipo de entretenimento deseja cadastrar?");
                     System.out.println("(1) Filme /n (2) Jogo /n " +
                             "(3) Serie /n (4) Episódio de série");
-                    String tipo = in.nextLine();
 
                     Entretenimento ent = null;
 
                     boolean flag = true;
                     while (flag) {
+                        String tipo = in.nextLine();
                         switch (tipo){
                             case "1" ->{
                                 System.out.println("Informe a duração do filme que deseja registrar: ");
@@ -166,6 +167,7 @@ public class Main {
 
                                 ent = new Filme(codigo, titulo, anoLanc, duracao);
                                 listaDeEntretenimento.addEntretenimento(ent, false);
+                                System.out.println("Entretenimento cadastrado!");
                                 flag = false;
                             }
                             case "2" ->{
@@ -176,6 +178,7 @@ public class Main {
 
                                 ent = new Jogo(codigo, titulo, anoLanc, tituloOriginal, genero);
                                 listaDeEntretenimento.addEntretenimento(ent, false);
+                                System.out.println("Entretenimento cadastrado!");
                                 flag = false;
                             }
                             case "3" -> {
@@ -184,6 +187,7 @@ public class Main {
 
                                 ent = new Serie(codigo,titulo,anoLanc,anoConc);
                                 listaDeEntretenimento.addEntretenimento(ent, false);
+                                System.out.println("Entretenimento cadastrado!");
                                 flag = false;
                             }
                             case "4" -> {
@@ -197,6 +201,7 @@ public class Main {
                                 Serie serie = (Serie) listaDeEntretenimento.pesquisaCodigo(codSerie);
                                 EpisodioSerie episodio = new EpisodioSerie(codigo, titulo, anoLanc, numTemporada, numEpisodio, serie);
                                 listaDeEntretenimento.addEntretenimento(episodio, false);
+                                System.out.println("Entretenimento cadastrado!");
                                 serie.linkaEp(episodio);
                                 flag = false;
                             }
@@ -291,7 +296,6 @@ public class Main {
                         default -> System.out.println("Ordenação informada incorreta!");
                     }
                     try{
-                        System.out.println(listaDeEntretenimento.getUltimaConsulta());
                         for(Entretenimento e : listaDeEntretenimento.getUltimaConsulta()){
                             System.out.println(e.getCodigo() + ", " + e.getTitulo());
                         }

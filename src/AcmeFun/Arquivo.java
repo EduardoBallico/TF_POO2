@@ -131,6 +131,8 @@ public class Arquivo {
             while(buffRead.ready()) {
                 String line = buffRead.readLine();
 
+                if(line.equals("")) continue;
+
                 ArrayList<String> valores = new ArrayList<>();
                 Collections.addAll(valores, line.split(";"));
 

@@ -40,6 +40,7 @@ public class Acesso {
         String data = dtf.format(getDataHora());
         return  data + ";" +
                 cliente.getEmail() + ";" +
-                entretenimento.getCodigo();
+                entretenimento.getCodigo()
+                + "\n";
     }
 }

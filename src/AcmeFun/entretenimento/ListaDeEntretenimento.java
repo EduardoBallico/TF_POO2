@@ -88,7 +88,6 @@ public class ListaDeEntretenimento {
             for (Entretenimento e : entretenimentos){
                 if (e.getTitulo().equals(s)){
                     aux.add(e);
-                    ultimaConsulta.remove(e);
                 }
             }
         }
@@ -106,14 +105,13 @@ public class ListaDeEntretenimento {
             array.add(ent.getAnoLancamento());
         }
 
-        Collections.sort(array);
+        array.sort(Collections.reverseOrder());
 
         ArrayList<Entretenimento> aux = new ArrayList<>();
         for (Integer i : array) {
             for (Entretenimento e : ultimaConsulta) {
                 if (e.getAnoLancamento() == i) {
                     aux.add(e);
-                    ultimaConsulta.remove(e);
                 }
             }
         }
@@ -128,7 +126,7 @@ public class ListaDeEntretenimento {
     public String toString(){
         StringBuilder s = new StringBuilder();
         for (Entretenimento value : entretenimentos) {
-            s.append("Cadastrado Entretenimento: ").append(value.toString()).append("\n");
+            s.append("Cadastrado Entretenimento: ").append(value.toString());
         }
         if(!s.toString().equals("")){
             return s.toString();

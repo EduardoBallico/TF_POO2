@@ -36,7 +36,11 @@ public class ListaDeAcesso {
     public ArrayList<Acesso> getAcessosMesCliente(int ano, int mes, Cliente cliente){
 
         ArrayList<Acesso> resultados = new ArrayList<>();
-        for(Acesso a : getAcessosMes(ano, mes)){
+
+        ArrayList<Acesso> aux = getAcessosMes(ano, mes);
+        if(aux == null) { return null; }
+
+        for(Acesso a : aux){
             if(a.getCliente().getEmail().equals(cliente.getEmail())){
                 resultados.add(a);
             }
@@ -64,8 +68,11 @@ public class ListaDeAcesso {
         double valorFinal = 0;
         double valorColaboradores = 0;
 
-        for (Acesso a : getAcessosMesCliente(ano, mes, cliente)){
-            valorFinal += a.getEntretenimento().getPreco();
+        ArrayList<Acesso> aux = getAcessosMesCliente(ano, mes, cliente);
+        if(!(aux == null)) {
+            for (Acesso a : aux){
+                valorFinal += a.getEntretenimento().getPreco();
+            }
         }
 
         if (cliente.getTipo().equals("3")) return valorFinal/2;
