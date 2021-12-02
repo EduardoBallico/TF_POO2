@@ -6,6 +6,7 @@ import AcmeFun.cliente.*;
 import AcmeFun.entretenimento.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -35,11 +36,11 @@ public class Main {
 
         Administrador adm = new Administrador("administracao@mail.com","admin123");
 
-        listaDeUsuarios.cadastraCliente(adm, false);
+        listaDeUsuarios.cadastraCliente(adm, true);
 
-        Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos());
-        Arquivo.readFileCliente(Arquivo.getArquivoClientes());
-        Arquivo.readFileAcessos(Arquivo.getArquivoAcessos());
+        listaDeEntretenimento = Arquivo.readFileEntretenimento(Arquivo.getArquivoEntretenimentos(), listaDeEntretenimento);
+        listaDeUsuarios = Arquivo.readFileCliente(Arquivo.getArquivoClientes(), listaDeUsuarios);
+        listaDeAcesso = Arquivo.readFileAcessos(Arquivo.getArquivoAcessos(), listaDeAcesso, listaDeEntretenimento, listaDeUsuarios);
     }
 
     public Usuario fazLogin(String email, String senha){
@@ -76,7 +77,7 @@ public class Main {
                     }
                 }
                 case "0" -> {
-                    System.out.println("Programa finalizado!");
+                    System.out.println("Sistema finalizado! Obrigado por utilizar nosso programa.");
                     System.exit(130);
                 }
                 default ->
@@ -226,10 +227,30 @@ public class Main {
                     System.out.println("Valor total de todos os acessos: "+ d);
                  }
                 case "4"-> {
-                    Arquivo.simulaCarga();
+                    System.out.println("Informe o arquivo para simulação: ");
+                    String arquivo = in.nextLine();
+
+                    System.out.println("Informe o tipo de arquivo:");
+                    System.out.println("1. Clientes");
+                    System.out.println("2. Entretenimentos");
+                    System.out.println("3. Acessos");
+
+                    String tipo = in.nextLine();
+
+                    ListaDeUsuarios simCli = new ListaDeUsuarios();
+                    ListaDeEntretenimento simEnt = new ListaDeEntretenimento();
+                    ListaDeAcesso simAcs = new ListaDeAcesso();
+                    if (tipo.equals("3")){
+                        Arquivo.simulaCarga(arquivo, tipo, listaDeUsuarios, listaDeEntretenimento, simAcs);
+                    }
+                    else{
+                        Arquivo.simulaCarga(arquivo, tipo, simCli, simEnt, simAcs);
+                    }
+
+
                 }
                 case "0" -> {
-                    System.out.println("Sistema finalizado. Obrigado por utilizar nosso programa.");
+                    System.out.println("Sistema finalizado");
                     return;
                 }
                 default -> System.out.println("Opção invalida!");
