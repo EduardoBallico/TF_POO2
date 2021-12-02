@@ -89,7 +89,7 @@ public class ListaDeAcesso {
     public String toString(){
         StringBuilder aux = new StringBuilder();
         for (Acesso value : acessos) {
-            aux.append("Cadastrado Acesso: ").append(value.toString()).append("\n");
+            aux.append("Cadastrado Acesso: ").append(value.toString());
         }
         if(!aux.toString().equals("")){
             return aux.toString();

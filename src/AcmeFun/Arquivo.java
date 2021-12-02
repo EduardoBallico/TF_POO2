@@ -66,6 +66,9 @@ public class Arquivo {
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
             return null;
+        } catch (Exception ex){
+            System.out.println("Erro");
+            return null;
         }
         return u;
     }
@@ -121,6 +124,9 @@ public class Arquivo {
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
             return null;
+        } catch (Exception ex){
+            System.out.println("Erro");
+            return null;
         }
         return e;
     }
@@ -143,13 +149,16 @@ public class Arquivo {
                 String codigoEntretenimento = valores.get(3);
                 Cliente cliente = (Cliente) u.procuraUsuario(email);
                 Entretenimento entretenimento = e.pesquisaCodigo(codigoEntretenimento);
-
                 Acesso acesso = new Acesso(cliente,entretenimento,dataConvertida);
-                a.adicionaAcesso(acesso, true);
+                if(cliente != null && entretenimento != null){
+                    a.adicionaAcesso(acesso, true);
+                }
             }
-
         } catch (IOException ex){
             System.out.println("Arquivo não encontrado. Tente novamente");
+            return null;
+        } catch (Exception ex){
+            System.out.println("Erro");
             return null;
         }
         return a;

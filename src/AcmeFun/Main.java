@@ -224,9 +224,9 @@ public class Main {
 
                         double res = listaDeAcesso.getCobrancaCliente(ano,mes,ac.getCliente());
 
-                        System.out.println("E-mail do cliente: "+email+" Horário do acesso: "+dateTime+
-                                "Código do Serviço acessado: "+cod+" Título do serviço: "+titulo+
-                                "Valor total do cliente: "+res);
+                        System.out.println("E-mail do cliente: " +email+ "\nHorário do acesso: "+dateTime+
+                                "\nCódigo do Serviço acessado: " +cod+ "\nTítulo do serviço: "+titulo+
+                                "\nValor total do cliente: " +res+ "\n");
                     }
                     double d = listaDeAcesso.getCobrancaTotal(ano,mes);
                     System.out.println("Valor total de todos os acessos: "+ d);
